@@ -22,7 +22,7 @@ public class UserService {
     }
 
     private void isValidEmail(String email) {
-        if(email.trim().isEmpty() || email.length() < 5) {
+        if(email.trim().isEmpty() || email.length() < 5 || !email.contains("@")) {
             throw new RuntimeException("Email khong hop le");
         }
     }

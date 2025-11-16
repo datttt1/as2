@@ -1,0 +1,72 @@
+#root {
+  background-color: white;
+  margin: 0 auto;
+  text-align: center;
+  text-decoration-color: #000;
+  color:#000;
+}
+
+.row-border td {
+  border-bottom: 1px solid lightgray;
+}
+
+/* .logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+} */
+.text {
+  color: #000; /* chữ đen */
+  margin: 0;
+  /* kích cỡ cơ bản */
+  font-size: 1rem; /* tương đương 16px */
+
+  /* căn chỉnh khoảng cách cho dễ đọc */
+  font-weight: 500;
+}
+
+/* Khi màn hình lớn hơn 768px (tablet trở lên) */
+@media (min-width: 768px) {
+  .text {
+    font-size: 1.1rem;
+  }
+}
+
+
+/* Khi màn hình lớn hơn 1024px (desktop) */
+
+/* @media (min-width: 1024px) {
+  .text {
+    font-size: 1.2rem;
+  }
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
+
+/* @media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+} */
+
+.read-the-docs {
+  color: #888;
+}
