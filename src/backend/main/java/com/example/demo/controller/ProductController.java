@@ -52,5 +52,22 @@ public void delete(@PathVariable Integer id) {
     productService.deleteProduct(id);
 }
 
+@GetMapping("/get/{id}")
+
+    public ProductResponse getById(@PathVariable Integer id) {
+        Product product = new Product();
+        product = productService.getProduct(id);
+        return new ProductResponse(product.getId(), product.getName(), product.getPrice(), product.getDescription(), product.getQuantity(), product.getCategory());
+ 
+
+    }
+
+@GetMapping("/getbyname/{name}")
+    public ProductResponse getByName(@PathVariable String name) {
+        Product product = productService.getProductByName(name);
+        return new ProductResponse(product.getId(), product.getName(), product.getPrice(), product.getDescription(), product.getQuantity(), product.getCategory());
+
+    }
+
 
 }

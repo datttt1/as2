@@ -79,4 +79,13 @@ public class ProductService {
     public Product getProduct(Integer id) {
         return productRepository.findById(id). orElseThrow(() -> new RuntimeException("Khong tim thay san pham"));
     }
+
+        public Product getProductByName(String name) {
+        Product product = productRepository.findByName(name);
+        if(product == null) {
+            throw new RuntimeException("Khong tim thay san pham");
+        }
+
+        return product;
+    }
 }

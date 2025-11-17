@@ -17,3 +17,13 @@ export const deletee = async(id) => {
     const response = await axios.delete(`${API_URL}/delete/${id}`);
     return response.data;
 }
+
+export const getById = async(id) => {
+    const response = await axios.get(`${API_URL}/get/${id}`);
+    return response.data
+}
+
+export const getByName = async(name) => {
+    const response = await axios.get(`${API_URL}/getbyname/${name}`);
+    return response.data;
+}
