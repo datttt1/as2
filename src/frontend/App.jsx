@@ -1,6 +1,8 @@
 import './App.css';
 import LoginPage from './pages/LoginPage.jsx';
 import DashboardPage from './pages/DashboardPage.jsx';
+import ProductForm from './components/ProductForm.jsx';
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // function App() {
 //   return (
@@ -14,7 +16,8 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<LoginPage />}/>
-        <Route path="/dashboard" element={<DashboardPage />}/>
+        <Route path="/products" element={<DashboardPage/>}/>
+        <Route path ="/products/form" element = {<ProductForm/>}/>
       </Routes>
     </Router>
   );

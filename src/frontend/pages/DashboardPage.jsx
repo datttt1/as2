@@ -1,16 +1,9 @@
-import { Link } from "react-router-dom";
-import LeftMenu from "../components/LeftMenu.jsx";
 import Products from "../components/Products.jsx";
+import Header from "../components/Header.jsx";
 const DashboardPage = () => {
     return (
         <>
-            <header
-                style={{
-                    backgroundColor: "black",
-                    height: "6vh",
-                }}>
-
-            </header>
+            <Header/>
             <main style={{
                 display: "flex",
                 backgroundColor: "lightgray",
@@ -20,7 +13,6 @@ const DashboardPage = () => {
                 padding: "20px",
                 boxSizing: "border-box"
             }}>
-                <LeftMenu/>
                 <Products/>
             </main>
 

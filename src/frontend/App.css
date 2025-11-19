@@ -4,12 +4,18 @@
   text-align: center;
   text-decoration-color: #000;
   color:#000;
+
 }
 
 .row-border td {
   border-bottom: 1px solid lightgray;
 }
 
+.error-text {
+  color: red;
+  font-size: larger;
+
+}
 /* .logo {
   height: 6em;
   padding: 1.5em;
