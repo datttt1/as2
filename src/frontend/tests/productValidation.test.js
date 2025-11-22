@@ -31,7 +31,7 @@ describe('Product Validation Tests', () => {
     test('TC1: Tên sản phẩm rỗng', () => {
         const p = { ...product, name: '' };
         const errors = validateProduct(p);
-        expect(errors.productName).toBe(
+        expect(errors.name).toBe(
             'Tên sản phẩm không được để trống'
         );
     });
@@ -39,7 +39,7 @@ describe('Product Validation Tests', () => {
     test('TC2: Tên sản phẩm quá ngắn', () => {
         const p = { ...product, name: 'ab' };
         const errors = validateProduct(p);
-        expect(errors.productName).toBe(
+        expect(errors.name).toBe(
             'Tên sản phẩm phải có ít nhất 3 ký tự'
         )
     });
@@ -47,7 +47,7 @@ describe('Product Validation Tests', () => {
     test('TC3: Tên sản phẩm quá dài', () => {
         const p = { ...product, name: 'a'.repeat(101) };
         const errors = validateProduct(p);
-        expect(errors.productName).toBe(
+        expect(errors.name).toBe(
             'Tên sản phẩm không được quá 100 ký tự'
         );
     });

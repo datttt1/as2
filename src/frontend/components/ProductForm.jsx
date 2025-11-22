@@ -1,50 +1,66 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import CustonRoundedButton from './CuttomRoundedButton';
+import CustonRoundedButton from '../assets/CustomRoundedButton.jsx';
 import { Combobox } from 'react-widgets';
 import { validateProduct } from '../utils/productValidation.js';
-import Header from './Header.jsx';
+import Header from '../assets/Header.jsx';
+import { getAll } from '../services/CategoryService.js';
+import { create, update } from '../services/ProductService.js';
+import { useNavigate } from 'react-router-dom';
 
-export const c = [
-    { id: 1, name: "category 1" },
-    { id: 2, name: "category 2" },
-    { id: 3, name: "category 3" },
-    { id: 4, name: "category 4" },
-    { id: 5, name: "category 5" },
-    { id: 6, name: "category 6" },
-    { id: 7, name: "category 7" },
 
-]
 const ProductForm = () => {
+    const navigate = useNavigate();
     const location = useLocation();
     const product = location.state?.product;
-    const [categories, setCategories] = useState([]);
     const [form, setForm] = useState({
+        id: product?.id || "",
         name: product?.name || "",
         price: product?.price || "",
         quantity: product?.quantity || "",
         description: product?.description || "",
         category: product?.category || null,
-        categories: null,
+        categories: product?.categories || [],
     });
     const [errors, setErrors] = useState({});
-
     const handleSubmit = () => {
-        if (product) {
-            // update product
+        if (product.id) {
+            try {
+                const updateProduct = async () => {
+                    const res = await update(form);
+
+                    navigate("/products", {
+                        state: {
+                            message: "Updated product successfully"
+                        },
+                        replace: true
+                    })
+                }
+                updateProduct();
+            } catch (error) {
+                console.log("Update product failed", error);
+            }
         } else {
-            // add new product
+            try {
+                const createProduct = async () => {
+                    const res = await create(form);
+                    navigate("/products", {
+                        state: {
+                            message: "Created product successfully"
+                        },
+                        replace: true
+                    })
+                }
+                createProduct();
+            } catch (error) {
+                console.log("Create product failed", error);
+            }
+
         }
-        window.history.back();
     };
-    useEffect(() => {
-        // fetch Categories 
-        setCategories(c);
-        setForm({...form, categories: c});
-    }, [])
 
     return <>
-        <Header/>
+        <Header />
         <main style={{
             width: "100vw",
             height: "94vh",
@@ -73,45 +89,42 @@ const ProductForm = () => {
                     marginBottom: "60px",
                 }}>Product Form</p>
 
-                <form onSubmit={e => {
-                    e.preventDefault();
-                    handleSubmit();
-                }}
-                    style={{
-                        width: "90%",
-                        height: "70%",
-                        display: "grid",
-                        gridTemplateColumns: "1fr 3fr 2fr ",
-                        gap: "20px",
-                        textAlign: "left",
-                        fontSize: "20px",
-                        paddingLeft: "30px",
+                <form style={{
+                    width: "90%",
+                    height: "70%",
+                    display: "grid",
+                    gridTemplateColumns: "1fr 3fr 2fr ",
+                    gap: "20px",
+                    textAlign: "left",
+                    fontSize: "20px",
+                    paddingLeft: "30px",
 
-                    }}
-                >   <p>Product Name: </p>
-                    <input value={form.name} onChange={e => {
-                        setForm({ ...form, name: e.target.value});
+                }}
+                >   <label htmlFor="name">Product Name</label>
+                    <input id="name" value={form.name} onChange={e => {
+                        setForm({ ...form, name: e.target.value });
                     }} />
                     <p className='error-text'>{errors.name}</p>
 
-                    <p>Price: </p>
-                    <input value={form.price} onChange={e => setForm({ ...form, price: e.target.value })} />
+                    <label htmlFor="price">Price</label>
+                    <input id="price" value={form.price} onChange={e => setForm({ ...form, price: e.target.value })} />
                     <p className='error-text'>{errors.price}</p>
 
-                    <p>Quantity: </p>
-                    <input value={form.quantity} onChange={e => setForm({ ...form, quantity: e.target.value })} />
+                    <label htmlFor="quantity">Quantity</label>
+                    <input id="quantity" value={form.quantity} onChange={e => setForm({ ...form, quantity: e.target.value })} />
                     <p className='error-text'>{errors.quantity}</p>
-                    <p>Description: </p>
-                    <textarea value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} 
-                            style={{height: "15vh"}}/>
+
+                    <label htmlFor="description">Description</label>
+                    <textarea id="description" value={form.description} onChange={e => setForm({ ...form, description: e.target.value })}
+                        style={{ height: "15vh" }} />
                     <p className='error-text'>{errors.description}</p>
-                    <p>Category: </p>
+                    <label htmlFor="category">Category</label>
                     <div style={{
                         width: "100%",
                         height: "100%",
                         display: "flex",
                     }}>
-                        <Combobox data={categories}
+                        <Combobox data={form.categories}
                             dataKey="id"
                             textField="name"
                             value={form.category}
@@ -154,30 +167,30 @@ const ProductForm = () => {
                     flex: 1,
                 }}>
                     <CustonRoundedButton text="Back" width={"15vw"} height={"7vh"} onClick={() => { window.history.back() }}> </CustonRoundedButton>
-                    <button type="submit"
-                        style={{
-                            width: "15vw",
-                            height: "7vh",
-                            borderRadius: "10px",
-                            fontSize: "24px",
-                            border: "none",
-                            backgroundColor: "black",
-                            color: "white",
-                            cursor: "pointer",
-                        }}
+                    <button style={{
+                        width: "15vw",
+                        height: "7vh",
+                        borderRadius: "10px",
+                        fontSize: "24px",
+                        border: "none",
+                        backgroundColor: "black",
+                        color: "white",
+                        cursor: "pointer",
+                    }}
                         onClick={() => {
                             const error = validateProduct(form);
                             setErrors(error);
                             if (Object.keys(error).length === 0) {
+                                console.log("No error in Product validation");
                                 handleSubmit();
                             }
                         }}>
-                        {product ? "Update" : "Add"}
+                        {product.id ? "Update" : "Create"}
 
                     </button>
                 </div>
             </div>
-        </main>
+        </main >
 
 
     </>

@@ -13,8 +13,12 @@
 
 .error-text {
   color: red;
-  font-size: larger;
+  font-size: large;
 
+}
+.data-text {
+  font-weight: bold;
+  font-size: larger;
 }
 /* .logo {
   height: 6em;
