@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -25,7 +25,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 @WebMvcTest(UserController.class)
-public class UserControllerIntegrationTest {
+ class UserControllerIntegrationTest {
     @Autowired
     private MockMvc mockMvc;
 

@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.controller;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
@@ -28,7 +28,7 @@ import com.example.demo.service.ProductService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WebMvcTest(ProductController.class)
-public class ProductControllerIntegrationTest {
+ class ProductControllerIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
