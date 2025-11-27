@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for services/CategoryService.js</title>
+    <title>Code coverage report for services/AuthService.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">services</a> CategoryService.js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">services</a> AuthService.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -72,18 +72,18 @@
 <a name='L7'></a><a href='#L7'>7</a>
 <a name='L8'></a><a href='#L8'>8</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import axios from "axios";
 &nbsp;
-const API_URL = "http://localhost:8080/api/category";
+const API_URL = "http://localhost:8080/api/auth";
 &nbsp;
-export const getAll = async() =&gt;{
-    const response = await axios.get(`${API_URL}`);
-<span class="cstat-no" title="statement not covered" >    return response.data;</span>
+export const loginUser = async (data) =&gt;{
+    const res = await axios.post(`${API_URL}/login`,data);
+<span class="cstat-no" title="statement not covered" >    return res.data;</span>
 }</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->

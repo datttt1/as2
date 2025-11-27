@@ -1,8 +1,10 @@
 package com.example.demo.service;
 
+import org.springframework.stereotype.Service;
+
 import com.example.demo.dto.userDTO.LoginResponse;
 import com.example.demo.dto.userDTO.UserLoginRequest;
-
+@Service
 public class AuthService {
     public LoginResponse authenticate (UserLoginRequest userLoginRequest) {
         if(!isValidRequest(userLoginRequest)) {

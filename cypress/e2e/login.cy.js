@@ -20,7 +20,9 @@ describe("Login E2E Tests", () => {
         loginPage.typePassword("test123");
 
         loginPage.clickLogin();
-
+        
+        loginPage.getUsernameError().should('have.length',0)
+        loginPage.getPasswordError().should('have.length',0)
         cy.url().should('contain', '/products');
     });
 

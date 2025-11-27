@@ -2,6 +2,8 @@ import { useState } from "react";
 import CustonRoundedButton from "../assets/CustomRoundedButton";
 import { useNavigate } from "react-router-dom";
 import { validateUsername, validatePassword } from "../utils/loginValidation.js";
+import { loginUser } from "../services/AuthService.js";
+
 
 const Login = () => {
     const navigate = useNavigate();
@@ -12,15 +14,20 @@ const Login = () => {
     const handleLogin = async () => {
         const error = { username: validateUsername(username), password: validatePassword(password) };
         setErrors(error);
-        console.log(error);
         if (error.username === null && error.password === null) {
+            try {
+                const user = await loginUser({username:username, password:password});
+                console.log("user:", user);
 
-            navigate("/products", {
-                state: {
-                    message: "Login successful"
-                },
-                replace: true
-            });
+                if (user.success) {
+                    navigate("/products", { state: { message: "Login successful" }, replace: true });
+                } else {
+                    alert(user.message);
+                }
+            } catch (error) {
+                console.error(error);
+                alert("Login failed");
+            }
         }
     }
     return (
@@ -84,7 +91,7 @@ const Login = () => {
                                 color: "black"
                             }}
                         ></input>
-                        <label className="error-text" data-testid="username-error" name ="username-error">{errors.username}</label>
+                        <label className="error-text" data-testid="username-error" name="username-error">{errors.username}</label>
 
                         <label
                             className="text">

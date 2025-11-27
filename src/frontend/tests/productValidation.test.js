@@ -76,13 +76,17 @@ describe('Product Validation Tests', () => {
             'Giá sản phẩm phải nhỏ hơn 1 tỷ'
         );
     });
-
+    test("TC6.1: Giá sản phẩm là số thập phân", () => {
+        const p = { ...product, price: 1.99 };
+        const errors = validateProduct(p);
+        expect(errors.price).toBeUndefined();
+    });
     // Quantity 
     test('TC7: Số lượng sản phẩm không phải là số', () => {
         const p = { ...product, quantity: 'abc' };
         const errors = validateProduct(p);
         expect(errors.quantity).toBe(
-            'Số lượng sản phẩm phải là số'
+            'Số lượng sản phẩm phải là số nguyên dương'
         );
     });
 
