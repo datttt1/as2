@@ -16,8 +16,8 @@ describe("Login E2E Tests", () => {
 
     it("should login successfully with valid credentials", () => {
 
-        loginPage.typeUsername("test");
-        loginPage.typePassword("test123");
+        loginPage.typeUsername("testuser");
+        loginPage.typePassword("testuser123");
 
         loginPage.clickLogin();
         
