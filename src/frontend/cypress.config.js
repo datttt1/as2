@@ -7,6 +7,9 @@ export default defineConfig({
     viewportHeight: 720,
     video: false,
     supportFile: false, // tắt support file
-    specPattern: "cypress/e2e/**/*.cy.{js,jsx,ts,tsx}"
+    specPattern: "cypress/e2e/**/*.cy.{js,jsx,ts,tsx}",
+    defaultCommandTimeout: 10000, // 10s
+    requestTimeout: 10000, // 10s
+
   },
 });

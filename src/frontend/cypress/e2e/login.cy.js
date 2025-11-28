@@ -22,8 +22,8 @@ describe("Login E2E Tests", () => {
 
         loginPage.clickLogin();
 
-        loginPage.getUsernameError({ timeout: 10000 }).should('have.length', 0)
-        loginPage.getPasswordError({ timeout: 10000 }).should('have.length', 0)
+        loginPage.getUsernameError().should('have.length', 0)
+        loginPage.getPasswordError().should('have.length', 0)
 
         cy.wait("@login").its("response.statusCode").should("eq", 200);
 
