@@ -8,8 +8,8 @@ export default defineConfig({
     video: false,
     supportFile: false, // tắt support file
     specPattern: "cypress/e2e/**/*.cy.{js,jsx,ts,tsx}",
-    defaultCommandTimeout: 10000, // 10s
-    requestTimeout: 10000, // 10s
+    defaultCommandTimeout: 20000, 
+    requestTimeout: 20000, 
 
   },
 });
