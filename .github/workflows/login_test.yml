@@ -37,12 +37,18 @@ jobs:
       run: |
         cd src/frontend
         npm test login
+        
     - name: Start frontend server
       run: |
         cd src/frontend
         npm run dev &
         npx wait-on http://localhost:5173
-        
+    - name: Start backend server
+      run: |
+        cd src/backend
+        npm run dev &
+        npx wait-on http://localhost:́8080
+
     - name: Run Login E2E Tests
       run: |
         cd src/frontend
