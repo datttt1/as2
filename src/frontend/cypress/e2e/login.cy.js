@@ -21,10 +21,12 @@ describe("Login E2E Tests", () => {
         loginPage.typePassword("testuser123");
 
         loginPage.clickLogin();
+
+        loginPage.getUsernameError({ timeout: 10000 }).should('have.length',0)
+        loginPage.getPasswordError({ timeout: 10000 }).should('have.length',0)
+
         cy.wait("@login");
 
-        loginPage.getUsernameError().should('have.length',0)
-        loginPage.getPasswordError().should('have.length',0)
 
         cy.url().should('contain', '/products');
     });
