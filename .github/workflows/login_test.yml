@@ -25,10 +25,7 @@ jobs:
     - name: Install dependencies
       run: |
         cd src/frontend
-        npm install
         npm ci 
-        npx cypress install --force
-        chmod -R +x ~/.cache/Cypress
 
 
     - name: Run login tests
@@ -37,6 +34,10 @@ jobs:
         npm test login
 
     - name: Run Login E2E Tests
-      run: |
-        cd src/frontend
-        npx cypress run --spec "cypress/e2e/login.cy.js"
+      uses: cypress-io/github-action@v6
+      with:
+        start: npm start
+        wait-on: 'http://localhost:5173'
+        wait-on-timeout: 60
+        browser: chrome
+        spec: cypress/e2e/login.cy.js
