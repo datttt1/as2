@@ -22,6 +22,12 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
+    - name: Setup Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '21'
+
     - name: Install dependencies
       run: |
         cd src/frontend
@@ -44,6 +50,7 @@ jobs:
         npm run dev &
         npx wait-on http://localhost:5173
     - name: Start backend server
+
       run: |
         cd src/backend
         mvn spring-boot:run &
