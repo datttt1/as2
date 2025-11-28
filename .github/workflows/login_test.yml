@@ -26,6 +26,9 @@ jobs:
       run: |
         cd src/frontend
         npm ci 
+        npx cypress install --force
+        chmod -R +x node_modules/cypress/bin
+        chmod -R +x ~/.cache/Cypress
 
 
     - name: Run login tests
@@ -34,16 +37,11 @@ jobs:
         npm test login
 
     - name: Run Login E2E Tests
-      uses: cypress-io/github-action@v6
-      with:
-        start: npm run start:frontend
-        wait-on: 'http://localhost:5173'
-        wait-on-timeout: 60
-        browser: chrome
-        config-file: src/frontend/cypress.config.js
-        spec: cypress/e2e/login.cy.js
-        component: false
-        record: false
-        publish-summary: true
+      run: |
+        cd src/frontend
+        npx cypress run --browser chrome --spec "cypress/e2e/login.cy.js"
+
+
+
 
 

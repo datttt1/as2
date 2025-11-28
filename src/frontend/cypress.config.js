@@ -8,6 +8,5 @@ export default defineConfig({
     video: false,
     supportFile: false, // tắt support file
     specPattern: "cypress/e2e/**/*.cy.{js,jsx,ts,tsx}"
-
   },
 });
