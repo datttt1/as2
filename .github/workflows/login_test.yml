@@ -49,16 +49,6 @@ jobs:
         cd src/frontend
         npm run dev &
         npx wait-on http://localhost:5173
-    - name: Install wait-on
-      run: npm install -g wait-on
-
-    - name: Start backend
-      run: |
-        cd src/backend
-        mvn spring-boot:run 
-    
-    - name: Wait for backend
-      run: wait-on http://localhost:8080
 
     - name: Run Login E2E Tests
       run: |

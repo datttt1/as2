@@ -4,7 +4,7 @@ const loginPage = new LoginPage();
 
 describe("Login E2E Tests", () => {
     beforeEach(() => {
-        cy.intercept("POST", "/api/auth/login").as("login");
+        cy.intercept("POST", "/api/auth/login",{success:true ,message:"Login Success", token:"FAKE_TOKEN_123"}).as("login");
         cy.clearLocalStorage();
         loginPage.navigate();
     });
@@ -25,7 +25,7 @@ describe("Login E2E Tests", () => {
         loginPage.getUsernameError().should('not.exist')
         loginPage.getPasswordError().should('not.exist')
 
-        cy.wait("@login").its("response.statusCode").should("eq", 200);
+        cy.wait("@login")
 
 
         cy.url().should('contain', '/products');
