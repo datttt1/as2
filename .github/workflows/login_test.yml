@@ -26,7 +26,6 @@ jobs:
       run: |
         cd src/frontend
         npm ci 
-        npx cypress install --force
     - name: Install Chrome
       run: |
         sudo apt-get update
@@ -38,9 +37,11 @@ jobs:
         npm test login
 
     - name: Run Login E2E Tests
-      run: |
-        cd src/frontend
-        npx cypress run --browser chrome --spec "cypress/e2e/login.cy.js"
+      uses: cypress-io/github-action@v6
+      with:
+        working-directory: src/frontend
+        browser: chrome
+        spec: cypress/e2e/login.cy.js
 
 
 
