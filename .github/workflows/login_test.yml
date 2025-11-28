@@ -27,7 +27,7 @@ jobs:
         cd src/frontend
         npm ci 
         npx cypress install --force
-        chmod -R +x node_modules/cypress/bin
+        chmod +x node_modules/cypress/bin
         chmod -R +x ~/.cache/Cypress
 
 
