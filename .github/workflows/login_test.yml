@@ -7,13 +7,12 @@ on:
     branches: [main]
 
 jobs:
-  test:
+  test-login:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
         node-version: [18.x]
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -24,13 +23,19 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: Install dependencies
-      run: npm ci
+      run: |
+        cd src
+        cd frontend
+        npm install
 
     - name: Run login tests
-      run: npm test -- --watchAll=false --ci --reporters=default --reporters=jest-junit
+      run: |
+        cd src
+        cd frontend
+        npm test -- --testPathPattern=Login
 
-    - name: Upload test reports
-      uses: actions/upload-artifact@v3
-      with:
-        name: jest-test-report
-        path: test-results/junit.xml
+    - name: Run Login E2E Tests
+      run: |
+        cd src
+        cd frontend
+        npm run test: e2e -- --spec " cypress/e2e/login.cy.js"
