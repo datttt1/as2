@@ -46,7 +46,7 @@ jobs:
     - name: Start backend server
       run: |
         cd src/backend
-        npm run dev &
+        mvn spring-boot:run &
         npx wait-on http://localhost:́8080
 
     - name: Run Login E2E Tests
