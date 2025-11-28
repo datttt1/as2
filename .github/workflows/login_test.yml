@@ -32,7 +32,7 @@ jobs:
       run: |
         cd src
         cd frontend
-        npm test -- --testPathPattern=Login
+        npm test login
 
     - name: Run Login E2E Tests
       run: |
