@@ -63,7 +63,11 @@ jobs:
         npm run dev &
         npx wait-on http://localhost:5173
 
-    
+    - name: Install Wait-on
+      run: |
+        cd src/backend
+        npm install -g wait-on
+
     - name: Wait for MySQL to be ready
       run: |
         echo "Waiting for MySQL..."
