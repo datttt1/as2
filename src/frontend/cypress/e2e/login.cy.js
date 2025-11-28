@@ -8,7 +8,7 @@ describe("Login E2E Tests", () => {
         cy.clearLocalStorage();
         loginPage.navigate();
     });
-    it("should render all components", ()=>{
+    it("should render all components", () => {
         cy.get('p').contains('Flogin').should('be.visible');
         loginPage.elements.usernameInput().should('be.visible');
         loginPage.elements.passwordInput().should('be.visible');
@@ -22,10 +22,10 @@ describe("Login E2E Tests", () => {
 
         loginPage.clickLogin();
 
-        loginPage.getUsernameError({ timeout: 10000 }).should('have.length',0)
-        loginPage.getPasswordError({ timeout: 10000 }).should('have.length',0)
+        loginPage.getUsernameError({ timeout: 10000 }).should('have.length', 0)
+        loginPage.getPasswordError({ timeout: 10000 }).should('have.length', 0)
 
-        cy.wait("@login");
+        cy.wait("@login").its("response.statusCode").should("eq", 200);
 
 
         cy.url().should('contain', '/products');
@@ -38,7 +38,7 @@ describe("Login E2E Tests", () => {
 
         loginPage.clickLogin();
 
-        loginPage.getUsernameError().should('have.length.greaterThan',0)
-        loginPage.getPasswordError().should('have.length.greaterThan',0)
+        loginPage.getUsernameError().should('have.length.greaterThan', 0)
+        loginPage.getPasswordError().should('have.length.greaterThan', 0)
     })
 });
