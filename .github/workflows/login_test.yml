@@ -36,8 +36,12 @@ jobs:
     - name: Run Login E2E Tests
       uses: cypress-io/github-action@v6
       with:
-        start: cd src/frontend && npm run dev
+        start: npm run start:frontend
         wait-on: 'http://localhost:5173'
         wait-on-timeout: 60
         browser: chrome
         spec: cypress/e2e/login.cy.js
+        component: false
+        record: false
+        publish-summary: true
+
