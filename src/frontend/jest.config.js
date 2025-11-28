@@ -5,4 +5,14 @@ export default {
   },
   setupFiles: ["<rootDir>/setupJestEnv.js"],
   setupFilesAfterEnv: ["<rootDir>/setupTestsAfterEnv.js"],
+   reporters: [
+    "default",
+    [
+      "jest-junit",
+      {
+        outputDirectory: "test-results",
+        outputName: "junit.xml"
+      }
+    ]
+  ]
 };

@@ -106,7 +106,7 @@ const ProductList = () => {
                     {flash && (
                         <label role="alert" style={{
                             color: "green",
-                            fontSize:"25",
+                            fontSize:"30",
                             
                         }}
                         data-testid="message">
