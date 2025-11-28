@@ -1,13 +1,17 @@
 import ProductForm from "../components/ProductForm";
 import * as reactRoute from 'react-router-dom';
 import { render, screen, fireEvent, waitFor, within } from "@testing-library/react";
-import { create, update } from "../services/ProductService.js";
+import { create, update, getAll as getAllProducts } from "../services/ProductService.js";
 import ProductList from "../components/ProductList.jsx";
+import { getAll as getAllCategories } from "../services/CategoryService.js";
 
 const categoriesMock = [
     { id: 1, name: "category 1", description: "category 1 description" },
     { id: 2, name: "category 2", description: "category 2 description" },
 ];
+jest.mock("../services/CategoryService.js");
+getAllCategories.mockResolvedValue(categoriesMock);
+
 
 jest.mock("../services/ProductService.js");
 const createdProduct = {
@@ -28,6 +32,7 @@ const updatedProduct = {
 }
 create.mockResolvedValue(createdProduct);
 update.mockResolvedValue(updatedProduct);
+getAllProducts.mockResolvedValue([]);
 
 jest.mock("react-router-dom", () => {
     const actual = jest.requireActual("react-router-dom");
@@ -67,18 +72,25 @@ describe("Product Form Integration Test", () => {
 
         reactRoute.useLocation.mockReturnValue({ state: { message: "Created product successfully" } });
 
+        await waitFor(() => {
+            expect(create).toHaveBeenCalledTimes(1)
+            expect(mockNavigate).toHaveBeenCalledTimes(1)
+        })
+
         render(
             <reactRoute.MemoryRouter>
                 <ProductList />
             </reactRoute.MemoryRouter>
         )
-
         await waitFor(() => {
-            expect(create).toHaveBeenCalledTimes(1)
-            expect(mockNavigate).toHaveBeenCalledTimes(1)
+            expect(getAllCategories).toHaveBeenCalled();
+            expect(getAllProducts).toHaveBeenCalled();
             expect(screen.getByRole("alert")).toHaveTextContent("Created product successfully");
 
         })
+
+
+
     });
 
     test("Update Product Successful", async () => {
@@ -113,7 +125,7 @@ describe("Product Form Integration Test", () => {
 
         fireEvent.click(screen.getByText("Update"));
 
-        reactRoute.useLocation.mockReturnValue({state: {message: "Updated product successfully"}})
+        reactRoute.useLocation.mockReturnValue({ state: { message: "Updated product successfully" } })
         render(
             <reactRoute.MemoryRouter>
                 <ProductList />
