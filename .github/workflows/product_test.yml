@@ -56,17 +56,6 @@ jobs:
       run: |
         cd src/frontend
         npm test product
-        
-    - name: Start frontend server
-      run: |
-        cd src/frontend
-        npm run dev &
-        npx wait-on http://localhost:5173
-
-    - name: Install Wait-on
-      run: |
-        cd src/backend
-        npm install -g wait-on
 
     - name: Wait for MySQL to be ready
       run: |
@@ -77,12 +66,13 @@ jobs:
           sleep 2
         done
     
-    - name: Start Backend
+    - name: Start frontend & backend server
       run: |
         cd src/backend
         mvn -q spring-boot:run -Dspring-boot.run.fork=true &
-        echo "Waiting for backend to start..."
-        npx wait-on tcp:8080 --timeout 60000
+        cd src/frontend
+        npm run dev &
+        npx wait-on http://localhost:5173,tcp:8080 --timeout 60000
 
 
 
