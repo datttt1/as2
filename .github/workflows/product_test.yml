@@ -9,6 +9,19 @@ on:
 jobs:
   test-login:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8
+        env:
+          MYSQL_ROOT_PASSWORD: nhattranxuan112
+          MYSQL_DATABASE: flogin
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
 
     strategy:
       matrix:
@@ -21,6 +34,12 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
+
+    - name: Set up JDK 21
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '21'
 
     - name: Install dependencies
       run: |
@@ -43,6 +62,25 @@ jobs:
         cd src/frontend
         npm run dev &
         npx wait-on http://localhost:5173
+
+    
+    - name: Wait for MySQL to be ready
+      run: |
+        echo "Waiting for MySQL..."
+        for i in {1..30}; do
+          nc -z localhost 3306 && echo "MySQL is up!" && break
+          echo "MySQL not ready yet..."
+          sleep 2
+        done
+    
+    - name: Start Backend
+      run: |
+        cd src/backend
+        mvn -q -DskipTests spring-boot:run &
+        echo "Waiting for backend to start..."
+        npx wait-on http://localhost:8080
+
+
 
     - name: Run Product E2E Tests
       run: |
