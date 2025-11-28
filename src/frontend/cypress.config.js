@@ -7,5 +7,7 @@ export default defineConfig({
     viewportHeight: 720,
     video: false,
     supportFile: false, // tắt support file
+    specPattern: "cypress/e2e/**/*.cy.{js,jsx,ts,tsx}"
+
   },
 });

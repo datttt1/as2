@@ -40,10 +40,10 @@ jobs:
         wait-on: 'http://localhost:5173'
         wait-on-timeout: 60
         browser: chrome
-        spec: src/frontend/cypress/e2e/login.cy.js
+        config-file: src/frontend/cypress.config.js
+        spec: cypress/e2e/login.cy.js
         component: false
         record: false
         publish-summary: true
-        config-file: src/frontend/cypress.config.js
 
 
