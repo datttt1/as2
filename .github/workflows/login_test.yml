@@ -38,13 +38,15 @@ jobs:
 
     - name: Clear Cypress cache
       run: rm -rf ~/.cache/Cypress
-      
+
     - name: Run Login E2E Tests
       uses: cypress-io/github-action@v6
       with:
         working-directory: src/frontend
         browser: chrome
         spec: cypress/e2e/login.cy.js
+        start: npm run dev
+        wait-on: http://localhost:5173
 
 
 
