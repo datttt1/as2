@@ -26,12 +26,11 @@ jobs:
       run: |
         cd src/frontend
         npm ci
-        npx cypress install
+        npx cypress install --force
 
     - name: Run login tests
       run: |
-        cd src
-        cd frontend
+        cd src/frontend
         npm test login
 
     - name: Run Login E2E Tests
