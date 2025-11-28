@@ -24,9 +24,9 @@ jobs:
 
     - name: Install dependencies
       run: |
-        cd src
-        cd frontend
-        npm install
+        cd src/frontend
+        npm ci
+        npx cypress install
 
     - name: Run login tests
       run: |
@@ -36,6 +36,5 @@ jobs:
 
     - name: Run Login E2E Tests
       run: |
-        cd src
-        cd frontend
-        npm run test:e2e -- --spec "cypress/e2e/login.cy.js"
+        cd src/frontend
+        npx cypress run --spec "cypress/e2e/login.cy.js"
