@@ -1,4 +1,4 @@
-name: Login Tests CI
+name: Product Tests CI
 
 on:
   push:
@@ -33,10 +33,10 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y google-chrome-stable
 
-    - name: Run login tests
+    - name: Run Product tests
       run: |
         cd src/frontend
-        npm test login
+        npm test product
         
     - name: Start frontend server
       run: |
@@ -44,10 +44,10 @@ jobs:
         npm run dev &
         npx wait-on http://localhost:5173
 
-    - name: Run Login E2E Tests
+    - name: Run Product E2E Tests
       run: |
         cd src/frontend
-        npx cypress run --spec "cypress/e2e/login.cy.js" --config-file cypress.config.js
+        npx cypress run --spec "cypress/e2e/product.cy.js" --config-file cypress.config.js
 
 
 
