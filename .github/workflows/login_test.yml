@@ -44,4 +44,6 @@ jobs:
         component: false
         record: false
         publish-summary: true
+        config-file: src/frontend/cypress.config.js
+
 
