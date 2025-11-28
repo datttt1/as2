@@ -80,9 +80,9 @@ jobs:
     - name: Start Backend
       run: |
         cd src/backend
-        mvn -q -DskipTests spring-boot:run &
+        mvn -q spring-boot:run -Dspring-boot.run.fork=true &
         echo "Waiting for backend to start..."
-        npx wait-on http://localhost:8080
+        npx wait-on http://localhost:8080 --timeout 60000
 
 
 
