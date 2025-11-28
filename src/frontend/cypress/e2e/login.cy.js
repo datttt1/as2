@@ -4,6 +4,7 @@ const loginPage = new LoginPage();
 
 describe("Login E2E Tests", () => {
     beforeEach(() => {
+        cy.intercept("POST", "/api/auth/login").as("login");
         cy.clearLocalStorage();
         loginPage.navigate();
     });
@@ -20,9 +21,11 @@ describe("Login E2E Tests", () => {
         loginPage.typePassword("testuser123");
 
         loginPage.clickLogin();
-        
+        cy.wait("@login");
+
         loginPage.getUsernameError().should('have.length',0)
         loginPage.getPasswordError().should('have.length',0)
+
         cy.url().should('contain', '/products');
     });
 
