@@ -27,6 +27,8 @@ jobs:
         cd src/frontend
         npm ci
         npx cypress install --force
+        chmod +x node_modules/cypress/bin/cypress
+
 
     - name: Run login tests
       run: |
