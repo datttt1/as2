@@ -38,4 +38,4 @@ jobs:
       run: |
         cd src
         cd frontend
-        npm run test: e2e -- --spec " cypress/e2e/login.cy.js"
+        npm run test:e2e -- --spec "cypress/e2e/login.cy.js"
