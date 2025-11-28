@@ -22,8 +22,8 @@ describe("Login E2E Tests", () => {
 
         loginPage.clickLogin();
 
-        loginPage.getUsernameError().should('have.length', 0)
-        loginPage.getPasswordError().should('have.length', 0)
+        loginPage.getUsernameError().should('not.exist')
+        loginPage.getPasswordError().should('not.exist')
 
         cy.wait("@login").its("response.statusCode").should("eq", 200);
 
