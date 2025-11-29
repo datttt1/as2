@@ -24,7 +24,6 @@ jobs:
           --health-retries=5
     env:
       VITE_API_URL: "http://localhost:8080"
-
     strategy:
       matrix:
         node-version: [20.x]
@@ -60,9 +59,7 @@ jobs:
         cd src/frontend
         echo "VITE_API_URL=http://localhost:8080" > .env
 
-
-
-    - name: Run Product tests
+    - name: Run Product Unit Test
       run: |
         cd src/frontend
         npm test product
@@ -81,7 +78,7 @@ jobs:
         sudo apt-get install -y mysql-client
         mysql -h 127.0.0.1 -u root -pnhattranxuan112 flogin < src/backend/db/flogin.sql
 
-    - name: Start Backend
+    - name: Start Backend server
       run: |
         cd src/backend
         mvn -q spring-boot:run -Dspring-boot.run.fork=false &
@@ -94,10 +91,6 @@ jobs:
         cd src/frontend
         npm run dev &
         npx wait-on http://localhost:5173
-
-    - name: Test backend API
-      run: |
-        curl -v http://localhost:8080/api/category || exit 1
 
     - name: Run Product E2E Tests
       run: |

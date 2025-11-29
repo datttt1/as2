@@ -9,6 +9,21 @@ on:
 jobs:
   test-login:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8
+        env:
+          MYSQL_ROOT_PASSWORD: nhattranxuan112
+          MYSQL_DATABASE: flogin
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+    env:
+      VITE_API_URL: "http://localhost:8080"
 
     strategy:
       matrix:
@@ -21,6 +36,11 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
+    - name: Set up JDK 21
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '21'
 
     - name: Install dependencies
       run: |
@@ -37,7 +57,34 @@ jobs:
       run: |
         cd src/frontend
         npm test login
+            
+    - name: Create .env file
+      run: |
+        cd src/frontend
+        echo "VITE_API_URL=http://localhost:8080" > .env
+
+    - name: Wait for MySQL to be ready
+      run: |
+        echo "Waiting for MySQL..."
+        for i in {1..30}; do
+          nc -z localhost 3306 && echo "MySQL is up!" && break
+          echo "MySQL not ready yet..."
+          sleep 2
+        done
         
+    - name: Import database schema
+      run: |
+        sudo apt-get install -y mysql-client
+        mysql -h 127.0.0.1 -u root -pnhattranxuan112 flogin < src/backend/db/flogin.sql
+
+    - name: Start Backend server
+      run: |
+        cd src/backend
+        mvn -q spring-boot:run -Dspring-boot.run.fork=false &
+        echo "Waiting for backend to start..."
+        npx wait-on tcp:8080 --timeout 60000
+        sleep 5
+
     - name: Start frontend server
       run: |
         cd src/frontend
