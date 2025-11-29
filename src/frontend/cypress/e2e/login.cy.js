@@ -4,7 +4,7 @@ const loginPage = new LoginPage();
 
 describe("Login E2E Tests", () => {
     beforeEach(() => {
-        cy.intercept("POST", "**/api/auth/login").as("login");
+        cy.intercept("POST","**/api/auth/login").as("login");
         cy.clearLocalStorage();
         loginPage.navigate();
     });
@@ -17,8 +17,8 @@ describe("Login E2E Tests", () => {
 
     it("should login successfully with valid credentials", () => {
 
-        loginPage.typeUsername("testuser");
-        loginPage.typePassword("testuser123");
+        loginPage.typeUsername("user1");
+        loginPage.typePassword("user123");
 
         loginPage.clickLogin();
 
@@ -28,6 +28,8 @@ describe("Login E2E Tests", () => {
         cy.wait("@login")
 
         cy.url().should('contain', '/products');
+
+        cy.get('label[data-testid="message"]').should('contain', 'Login successful');
     });
 
     it("should display error messages for invalid credentials", () => {
