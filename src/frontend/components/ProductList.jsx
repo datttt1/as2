@@ -67,7 +67,6 @@ const ProductList = () => {
             }
         };
         fetchProductsCategories();
-        console.log("fetch Products");
     }, []);
 
     return (
