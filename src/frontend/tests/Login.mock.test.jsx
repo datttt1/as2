@@ -3,7 +3,10 @@ import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 import * as authService from "../services/AuthService";
 import * as reactRouter from "react-router-dom";
 
-jest.mock("../services/AuthService.js");
+jest.mock("../services/AuthService.js",()=>({
+    __esModule: true,
+    loginUser: jest.fn()
+}));
 
 jest.mock("react-router-dom", () => {
     const actual = jest.requireActual("react-router-dom")

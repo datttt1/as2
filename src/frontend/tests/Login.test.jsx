@@ -10,6 +10,10 @@ jest.mock("react-router-dom", () => {
 
     }
 })
+jest.mock("../services/AuthService.js", () => ({
+    __esModule: true,
+    loginUser: jest.fn()
+}));
 describe("Login Component Test", () => {
     const navigateMock = jest.fn();
     beforeEach(() => {
