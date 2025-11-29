@@ -4,11 +4,11 @@ const productPage = new ProductPage();
 
 describe("Product E2E Tests", () => {
   beforeEach(() => {
-    cy.intercept("GET", "/api/category").as("getCategories");
-    cy.intercept("GET", "/api/product").as("getProducts");
-    cy.intercept("POST", "/api/product").as("createProduct");
-    cy.intercept("PUT", "/api/product/update").as("updateProduct");
-    cy.intercept("DELETE", "/api/product/delete/*").as("deleteProduct");
+    cy.intercept("GET", "**/api/category").as("getCategories");
+    cy.intercept("GET", "**/api/product").as("getProducts");
+    cy.intercept("POST", "**/api/product").as("createProduct");
+    cy.intercept("PUT", "**/api/product/update").as("updateProduct");
+    cy.intercept("DELETE", "**/api/product/delete/*").as("deleteProduct");
     cy.clearLocalStorage();
     productPage.navigateProductList();
   });

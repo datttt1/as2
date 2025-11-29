@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="17" failures="0" errors="0" time="3.116">
-  <testsuite name="Login Validation Tests" errors="0" failures="0" skipped="0" timestamp="2025-11-29T04:28:39" time="0.997" tests="11">
-    <testcase classname="Login Validation Tests TC1: Username rỗng" name="Login Validation Tests TC1: Username rỗng" time="0.009">
+<testsuites name="jest tests" tests="17" failures="0" errors="0" time="3.377">
+  <testsuite name="Login Validation Tests" errors="0" failures="0" skipped="0" timestamp="2025-11-29T04:41:45" time="1.082" tests="11">
+    <testcase classname="Login Validation Tests TC1: Username rỗng" name="Login Validation Tests TC1: Username rỗng" time="0.01">
     </testcase>
-    <testcase classname="Login Validation Tests TC2: Username quá ngắn" name="Login Validation Tests TC2: Username quá ngắn" time="0.001">
+    <testcase classname="Login Validation Tests TC2: Username quá ngắn" name="Login Validation Tests TC2: Username quá ngắn" time="0.002">
     </testcase>
     <testcase classname="Login Validation Tests TC3: Username quá dài" name="Login Validation Tests TC3: Username quá dài" time="0.001">
     </testcase>
-    <testcase classname="Login Validation Tests TC4: Username chứa khoảng trắng" name="Login Validation Tests TC4: Username chứa khoảng trắng" time="0.001">
+    <testcase classname="Login Validation Tests TC4: Username chứa khoảng trắng" name="Login Validation Tests TC4: Username chứa khoảng trắng" time="0.002">
     </testcase>
-    <testcase classname="Login Validation Tests TC5: Username chứa ký tự đặc biệt" name="Login Validation Tests TC5: Username chứa ký tự đặc biệt" time="0.002">
+    <testcase classname="Login Validation Tests TC5: Username chứa ký tự đặc biệt" name="Login Validation Tests TC5: Username chứa ký tự đặc biệt" time="0.001">
     </testcase>
-    <testcase classname="Login Validation Tests TC6 : Password rỗng" name="Login Validation Tests TC6 : Password rỗng" time="0.001">
+    <testcase classname="Login Validation Tests TC6 : Password rỗng" name="Login Validation Tests TC6 : Password rỗng" time="0">
     </testcase>
-    <testcase classname="Login Validation Tests TC7 : Password quá ngắn" name="Login Validation Tests TC7 : Password quá ngắn" time="0.001">
+    <testcase classname="Login Validation Tests TC7 : Password quá ngắn" name="Login Validation Tests TC7 : Password quá ngắn" time="0">
     </testcase>
     <testcase classname="Login Validation Tests TC8 : Password quá dài" name="Login Validation Tests TC8 : Password quá dài" time="0">
     </testcase>
-    <testcase classname="Login Validation Tests TC9 : Password không chứa cả chữ và số" name="Login Validation Tests TC9 : Password không chứa cả chữ và số" time="0.001">
+    <testcase classname="Login Validation Tests TC9 : Password không chứa cả chữ và số" name="Login Validation Tests TC9 : Password không chứa cả chữ và số" time="0">
     </testcase>
     <testcase classname="Login Validation Tests TC10: Username hợp lệ" name="Login Validation Tests TC10: Username hợp lệ" time="0">
     </testcase>
-    <testcase classname="Login Validation Tests TC11: Password hợp lệ" name="Login Validation Tests TC11: Password hợp lệ" time="0">
+    <testcase classname="Login Validation Tests TC11: Password hợp lệ" name="Login Validation Tests TC11: Password hợp lệ" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="Login Mock Test" errors="0" failures="0" skipped="0" timestamp="2025-11-29T04:28:39" time="1.425" tests="2">
-    <testcase classname="Login Mock Test Login successful" name="Login Mock Test Login successful" time="0.19">
+  <testsuite name="Login Integration Test" errors="0" failures="0" skipped="0" timestamp="2025-11-29T04:41:45" time="1.42" tests="2">
+    <testcase classname="Login Integration Test Show errors when submit empty username and password" name="Login Integration Test Show errors when submit empty username and password" time="0.132">
     </testcase>
-    <testcase classname="Login Mock Test Login failed with wrong password" name="Login Mock Test Login failed with wrong password" time="0.09">
-    </testcase>
-  </testsuite>
-  <testsuite name="Login Component Test" errors="0" failures="0" skipped="0" timestamp="2025-11-29T04:28:39" time="1.523" tests="2">
-    <testcase classname="Login Component Test Login rendering" name="Login Component Test Login rendering" time="0.094">
-    </testcase>
-    <testcase classname="Login Component Test Change username input and password input" name="Login Component Test Change username input and password input" time="0.03">
+    <testcase classname="Login Integration Test Login successful" name="Login Integration Test Login successful" time="0.041">
     </testcase>
   </testsuite>
-  <testsuite name="Login Integration Test" errors="0" failures="0" skipped="0" timestamp="2025-11-29T04:28:39" time="1.627" tests="2">
-    <testcase classname="Login Integration Test Show errors when submit empty username and password" name="Login Integration Test Show errors when submit empty username and password" time="0.118">
+  <testsuite name="Login Component Test" errors="0" failures="0" skipped="0" timestamp="2025-11-29T04:41:45" time="1.674" tests="2">
+    <testcase classname="Login Component Test Login rendering" name="Login Component Test Login rendering" time="0.091">
     </testcase>
-    <testcase classname="Login Integration Test Login successful" name="Login Integration Test Login successful" time="0.049">
+    <testcase classname="Login Component Test Change username input and password input" name="Login Component Test Change username input and password input" time="0.026">
+    </testcase>
+  </testsuite>
+  <testsuite name="Login Mock Test" errors="0" failures="0" skipped="0" timestamp="2025-11-29T04:41:45" time="1.854" tests="2">
+    <testcase classname="Login Mock Test Login successful" name="Login Mock Test Login successful" time="0.17">
+    </testcase>
+    <testcase classname="Login Mock Test Login failed with wrong password" name="Login Mock Test Login failed with wrong password" time="0.089">
     </testcase>
   </testsuite>
 </testsuites>

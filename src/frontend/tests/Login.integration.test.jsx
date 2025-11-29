@@ -2,6 +2,8 @@ import Login from "../components/Login.jsx";
 import { screen, render, fireEvent, waitFor } from "@testing-library/react";
 import * as reactRouter from "react-router-dom";
 import { use } from "react";
+import * as loginService from "../services/AuthService.js";
+
 
 jest.mock("react-router-dom", () => {
     const actual = jest.requireActual("react-router-dom");
@@ -13,7 +15,7 @@ jest.mock("react-router-dom", () => {
 })
 jest.mock("../services/AuthService.js", () => ({
     __esModule: true,
-    loginUser: jest.fn()
+    loginUser: jest.fn().mockResolvedValue({success: null, message: null, token: null})
 }));
 jest.mock("../services/CategoryService.js",()=>({
     __esModule: true,
@@ -27,6 +29,7 @@ jest.mock("../services/ProductService.js", () => ({
 describe("Login Integration Test", () => {
     const navigateMock = jest.fn();
     beforeEach(() => {
+        window.alert = jest.fn();
         reactRouter.useNavigate.mockReturnValue(navigateMock);
         jest.clearAllMocks();
     })
