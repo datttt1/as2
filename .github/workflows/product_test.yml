@@ -76,6 +76,10 @@ jobs:
           echo "MySQL not ready yet..."
           sleep 2
         done
+    - name: Import database schema
+      run: |
+        sudo apt-get install -y mysql-client
+        mysql -h 127.0.0.1 -u root -pnhattranxuan112 flogin < src/backend/db/flogin.sql
 
     - name: Start Backend
       run: |
