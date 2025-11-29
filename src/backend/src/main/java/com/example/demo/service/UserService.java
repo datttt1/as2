@@ -10,7 +10,10 @@ import com.example.demo.repository.UserRepository;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
-    
+    public UserService(UserRepository userRepository)
+    {
+        this.userRepository = userRepository;
+    }
     private boolean isValidUsername(String username) {
         String regex = "^[a-zA-Z0-9._-]{3,50}$";
         return username != null && username.matches(regex);

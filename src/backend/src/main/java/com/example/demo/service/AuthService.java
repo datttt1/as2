@@ -6,6 +6,8 @@ import com.example.demo.dto.userDTO.LoginResponse;
 import com.example.demo.dto.userDTO.UserLoginRequest;
 @Service
 public class AuthService {
+    public AuthService() {
+    }
     public LoginResponse authenticate (UserLoginRequest userLoginRequest) {
         if(!isValidRequest(userLoginRequest)) {
             return new LoginResponse(false, "Validation failed", null);

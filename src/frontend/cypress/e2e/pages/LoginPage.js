@@ -8,7 +8,7 @@ export class LoginPage {
     }
 
     navigate() {
-        cy.visit('/');
+        cy.visit('http://localhost:5173/');
     }
 
     typeUsername(username) {

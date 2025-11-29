@@ -1,7 +1,7 @@
 export class ProductPage{
 
     navigateProductList(){
-        cy.visit('/products');
+        cy.visit('http://localhost:5173/products');
     }
     getProductRow(name){
         return cy.contains('td[data-testid="product-name"]',name).closest('tr');
