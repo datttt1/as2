@@ -53,25 +53,11 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y google-chrome-stable
 
-    - name: Run login tests
-      run: |
-        cd src/frontend
-        npm test login
-            
     - name: Create .env file
       run: |
         cd src/frontend
         echo "VITE_API_URL=http://localhost:8080" > .env
     
-    - name: Run Backend Tests
-      run: |
-        cd src/backend
-        mvn clean test
-
-    - name: Run Frontend Tests
-      run: |
-        cd src/frontend
-        npm test -- --coverage
 
     - name: Wait for MySQL to be ready
       run: |
@@ -119,6 +105,16 @@ jobs:
         cd src/frontend
         npm run test:e2e
     
+    - name: Run Backend Tests
+      run: |
+        cd src/backend
+        mvn clean test
+
+    - name: Run Frontend Tests
+      run: |
+        cd src/frontend
+        npm test -- --coverage
+
     - name : Upload Coverage
       uses : codecov/codecov-action@v2
       with :

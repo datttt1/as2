@@ -90,7 +90,12 @@ jobs:
         cd src/frontend
         npm run dev &
         npx wait-on http://localhost:5173
-
+    
+    - name: Run login tests
+      run: |
+        cd src/frontend
+        npm test login
+            
     - name: Run Login E2E Tests
       run: |
         cd src/frontend
