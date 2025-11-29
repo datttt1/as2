@@ -91,6 +91,9 @@ jobs:
         npm run dev &
         npx wait-on http://localhost:5173
 
+    - name: Test backend API
+      run: |
+        curl -v http://localhost:8080/api/category || exit 1
 
     - name: Run Product E2E Tests
       run: |

@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1764337521580" clover="3.2.0">
-  <project timestamp="1764337521580" name="All files">
-    <metrics statements="182" coveredstatements="161" conditionals="102" coveredconditionals="99" methods="48" coveredmethods="40" elements="332" coveredelements="300" complexity="0" loc="182" ncloc="182" packages="4" files="11" classes="11"/>
+<coverage generated="1764392596243" clover="3.2.0">
+  <project timestamp="1764392596244" name="All files">
+    <metrics statements="154" coveredstatements="147" conditionals="102" coveredconditionals="99" methods="40" coveredmethods="38" elements="296" coveredelements="284" complexity="0" loc="154" ncloc="154" packages="3" files="8" classes="8"/>
     <package name="assets">
       <metrics statements="6" coveredstatements="6" conditionals="10" coveredconditionals="9" methods="2" coveredmethods="2"/>
       <file name="CustomRoundedButton.jsx" path="D:\VSCode\Assignment2\as2\src\frontend\assets\CustomRoundedButton.jsx">
         <metrics statements="4" coveredstatements="4" conditionals="10" coveredconditionals="9" methods="1" coveredmethods="1"/>
         <line num="1" count="7" type="stmt"/>
-        <line num="2" count="52" type="cond" truecount="3" falsecount="1"/>
-        <line num="5" count="52" type="stmt"/>
-        <line num="6" count="52" type="stmt"/>
+        <line num="2" count="54" type="cond" truecount="3" falsecount="1"/>
+        <line num="5" count="54" type="stmt"/>
+        <line num="6" count="54" type="stmt"/>
       </file>
       <file name="Header.jsx" path="D:\VSCode\Assignment2\as2\src\frontend\assets\Header.jsx">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="6" type="stmt"/>
-        <line num="2" count="35" type="stmt"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="2" count="37" type="stmt"/>
       </file>
     </package>
     <package name="components">
-      <metrics statements="102" coveredstatements="95" conditionals="42" coveredconditionals="40" methods="34" coveredmethods="32"/>
+      <metrics statements="101" coveredstatements="94" conditionals="42" coveredconditionals="40" methods="34" coveredmethods="32"/>
       <file name="Login.jsx" path="D:\VSCode\Assignment2\as2\src\frontend\components\Login.jsx">
         <metrics statements="20" coveredstatements="18" conditionals="6" coveredconditionals="6" methods="4" coveredmethods="4"/>
         <line num="8" count="3" type="stmt"/>
@@ -32,10 +32,10 @@
         <line num="17" count="4" type="cond" truecount="4" falsecount="0"/>
         <line num="18" count="3" type="stmt"/>
         <line num="19" count="3" type="stmt"/>
-        <line num="20" count="2" type="stmt"/>
-        <line num="22" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="22" count="3" type="cond" truecount="2" falsecount="0"/>
         <line num="23" count="1" type="stmt"/>
-        <line num="25" count="1" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
         <line num="28" count="0" type="stmt"/>
         <line num="29" count="0" type="stmt"/>
         <line num="33" count="18" type="stmt"/>
@@ -86,91 +86,51 @@
         <line num="188" count="2" type="stmt"/>
       </file>
       <file name="ProductList.jsx" path="D:\VSCode\Assignment2\as2\src\frontend\components\ProductList.jsx">
-        <metrics statements="45" coveredstatements="43" conditionals="16" coveredconditionals="16" methods="18" coveredmethods="17"/>
-        <line num="10" count="4" type="stmt"/>
-        <line num="12" count="15" type="stmt"/>
-        <line num="13" count="15" type="stmt"/>
-        <line num="14" count="15" type="stmt"/>
-        <line num="15" count="15" type="stmt"/>
-        <line num="16" count="15" type="stmt"/>
-        <line num="17" count="15" type="cond" truecount="2" falsecount="0"/>
-        <line num="19" count="15" type="stmt"/>
+        <metrics statements="44" coveredstatements="42" conditionals="16" coveredconditionals="16" methods="18" coveredmethods="17"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="12" count="17" type="stmt"/>
+        <line num="13" count="17" type="stmt"/>
+        <line num="14" count="17" type="stmt"/>
+        <line num="15" count="17" type="stmt"/>
+        <line num="16" count="17" type="stmt"/>
+        <line num="17" count="17" type="cond" truecount="2" falsecount="0"/>
+        <line num="19" count="17" type="stmt"/>
         <line num="20" count="7" type="cond" truecount="2" falsecount="0"/>
         <line num="22" count="2" type="stmt"/>
         <line num="24" count="2" type="stmt"/>
-        <line num="27" count="15" type="stmt"/>
+        <line num="27" count="17" type="stmt"/>
         <line num="28" count="8" type="cond" truecount="2" falsecount="0"/>
         <line num="29" count="3" type="stmt"/>
-        <line num="34" count="15" type="stmt"/>
+        <line num="34" count="17" type="stmt"/>
         <line num="35" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="36" count="1" type="stmt"/>
         <line num="40" count="1" type="stmt"/>
-        <line num="43" count="15" type="stmt"/>
+        <line num="43" count="17" type="stmt"/>
         <line num="44" count="1" type="stmt"/>
-        <line num="47" count="15" type="stmt"/>
+        <line num="47" count="17" type="stmt"/>
         <line num="48" count="1" type="stmt"/>
         <line num="49" count="1" type="stmt"/>
         <line num="50" count="2" type="stmt"/>
         <line num="51" count="1" type="stmt"/>
         <line num="54" count="0" type="stmt"/>
-        <line num="58" count="15" type="stmt"/>
+        <line num="58" count="17" type="stmt"/>
         <line num="60" count="7" type="stmt"/>
         <line num="61" count="7" type="stmt"/>
         <line num="62" count="7" type="stmt"/>
-        <line num="63" count="5" type="stmt"/>
-        <line num="64" count="5" type="stmt"/>
+        <line num="63" count="7" type="stmt"/>
+        <line num="64" count="7" type="stmt"/>
         <line num="66" count="0" type="stmt"/>
         <line num="69" count="7" type="stmt"/>
-        <line num="70" count="7" type="stmt"/>
-        <line num="73" count="15" type="stmt"/>
-        <line num="159" count="18" type="stmt"/>
+        <line num="72" count="17" type="stmt"/>
+        <line num="158" count="18" type="stmt"/>
+        <line num="160" count="1" type="stmt"/>
         <line num="161" count="1" type="stmt"/>
-        <line num="162" count="1" type="stmt"/>
-        <line num="170" count="1" type="stmt"/>
+        <line num="169" count="1" type="stmt"/>
+        <line num="206" count="1" type="stmt"/>
         <line num="207" count="1" type="stmt"/>
-        <line num="208" count="1" type="stmt"/>
+        <line num="229" count="1" type="stmt"/>
         <line num="230" count="1" type="stmt"/>
-        <line num="231" count="1" type="stmt"/>
-        <line num="258" count="1" type="stmt"/>
-      </file>
-    </package>
-    <package name="services">
-      <metrics statements="27" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="2"/>
-      <file name="AuthService.js" path="D:\VSCode\Assignment2\as2\src\frontend\services\AuthService.js">
-        <metrics statements="4" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="3" count="3" type="stmt"/>
-        <line num="5" count="3" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-      </file>
-      <file name="CategoryService.js" path="D:\VSCode\Assignment2\as2\src\frontend\services\CategoryService.js">
-        <metrics statements="4" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="3" count="5" type="stmt"/>
-        <line num="5" count="5" type="stmt"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-      </file>
-      <file name="ProductService.js" path="D:\VSCode\Assignment2\as2\src\frontend\services\ProductService.js">
-        <metrics statements="19" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="0"/>
-        <line num="3" count="6" type="stmt"/>
-        <line num="5" count="6" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="11" count="6" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="16" count="6" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="21" count="6" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="26" count="6" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="28" count="0" type="stmt"/>
-        <line num="30" count="6" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
+        <line num="257" count="1" type="stmt"/>
       </file>
     </package>
     <package name="utils">
