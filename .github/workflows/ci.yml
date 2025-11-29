@@ -75,11 +75,6 @@ jobs:
         sleep 10
         mysql -h 127.0.0.1 -P 3306 -u root -pnhattranxuan112 flogin < src/backend/db/flogin.sql
 
-    - name: Check DB contents
-      run: |
-        sudo apt-get install -y mysql-client
-        mysql -h 127.0.0.1 -u root -pnhattranxuan112 -e "SELECT * FROM user;" flogin
-
     - name: Start Backend server
       run: |
         cd src/backend
@@ -93,12 +88,6 @@ jobs:
         cd src/frontend
         npm run dev &
         npx wait-on http://localhost:5173
-
-    - name: Test login API 
-      run: |
-        curl -i -X POST http://localhost:8080/api/auth/login \
-        -H "Content-Type: application/json" \
-        -d '{"username":"user1","password":"user123"}'
 
     - name: Run E2E Tests
       run: |
