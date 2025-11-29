@@ -21,7 +21,7 @@ describe("Login E2E Tests", () => {
         loginPage.typePassword("user123");
 
         loginPage.clickLogin();
-        cy.wait(0);
+        
         loginPage.getUsernameError().should('not.be.visible')
         loginPage.getPasswordError().should('not.be.visible')
 
