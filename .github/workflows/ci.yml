@@ -109,7 +109,7 @@ jobs:
     - name : Upload Coverage
       uses : codecov/codecov-action@v2
       with :
-        files : ./frontend/coverage /lcov.info,./backend/target/site/jacoco/jacoco.xml
+        files : src/frontend/coverage/lcov.info,src/backend/target/site/jacoco/jacoco.xml
 
 
 
