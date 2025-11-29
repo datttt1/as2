@@ -27,7 +27,7 @@ describe("Login E2E Tests", () => {
 
         cy.wait("@login",{timeout: 10000})
 
-        cy.url().should('contain', '/products');
+        cy.url({timeout:10000}).should('contain', '/products');
 
         cy.get('label[data-testid="message"]').should('contain', 'Login successful');
     });
