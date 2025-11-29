@@ -83,6 +83,7 @@ jobs:
         mvn -q spring-boot:run -Dspring-boot.run.fork=false &
         echo "Waiting for backend to start..."
         npx wait-on tcp:8080 --timeout 60000
+        sleep 5
 
     - name: Start frontend server
       run: |
