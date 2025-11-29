@@ -9,11 +9,11 @@ const categoriesMock = [
     { id: 1, name: "category 1", description: "category 1 description" },
     { id: 2, name: "category 2", description: "category 2 description" },
 ];
-jest.mock("../services/CategoryService.js");
-getAllCategories.mockResolvedValue(categoriesMock);
+jest.mock("../services/CategoryService.js",()=>({
+      __esModule: true,
+    getAll: jest.fn().mockResolvedValue(categoriesMock)
+}));
 
-
-jest.mock("../services/ProductService.js");
 const createdProduct = {
     id: "",
     name: "Product 99",
@@ -30,9 +30,12 @@ const updatedProduct = {
     description: "Product 99 description",
     category: { id: 1, name: "category 1", description: "category 1 description" },
 }
-create.mockResolvedValue(createdProduct);
-update.mockResolvedValue(updatedProduct);
-getAllProducts.mockResolvedValue([]);
+jest.mock("../services/ProductService.js",()=>({
+      __esModule: true,   
+    getAll: jest.fn().mockResolvedValue([]),
+    create: jest.fn().mockResolvedValue(createdProduct),
+    update: jest.fn().mockResolvedValue(updatedProduct)
+}));
 
 jest.mock("react-router-dom", () => {
     const actual = jest.requireActual("react-router-dom");

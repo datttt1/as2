@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="6" failures="0" errors="0" time="2.346">
-  <testsuite name="Product Form Component Test" errors="0" failures="0" skipped="0" timestamp="2025-11-28T18:35:47" time="0.981" tests="4">
-    <testcase classname="Product Form Component Test Show product info when update" name="Product Form Component Test Show product info when update" time="0.088">
+<testsuites name="jest tests" tests="6" failures="0" errors="0" time="3.125">
+  <testsuite name="Product Form Integration Test" errors="0" failures="0" skipped="0" timestamp="2025-11-29T04:09:15" time="1.681" tests="2">
+    <testcase classname="Product Form Integration Test Add new Product Successful" name="Product Form Integration Test Add new Product Successful" time="0.376">
     </testcase>
-    <testcase classname="Product Form Component Test Show empty product info when create" name="Product Form Component Test Show empty product info when create" time="0.015">
-    </testcase>
-    <testcase classname="Product Form Component Test Show categories dropdownlist" name="Product Form Component Test Show categories dropdownlist" time="0.054">
-    </testcase>
-    <testcase classname="Product Form Component Test Change category after selected" name="Product Form Component Test Change category after selected" time="0.023">
+    <testcase classname="Product Form Integration Test Update Product Successful" name="Product Form Integration Test Update Product Successful" time="0.087">
     </testcase>
   </testsuite>
-  <testsuite name="Product Form Integration Test" errors="0" failures="0" skipped="0" timestamp="2025-11-28T18:35:47" time="1.437" tests="2">
-    <testcase classname="Product Form Integration Test Add new Product Successful" name="Product Form Integration Test Add new Product Successful" time="0.309">
+  <testsuite name="Product Form Component Test" errors="0" failures="0" skipped="0" timestamp="2025-11-29T04:09:15" time="1.732" tests="4">
+    <testcase classname="Product Form Component Test Show product info when update" name="Product Form Component Test Show product info when update" time="0.097">
     </testcase>
-    <testcase classname="Product Form Integration Test Update Product Successful" name="Product Form Integration Test Update Product Successful" time="0.091">
+    <testcase classname="Product Form Component Test Show empty product info when create" name="Product Form Component Test Show empty product info when create" time="0.016">
+    </testcase>
+    <testcase classname="Product Form Component Test Show categories dropdownlist" name="Product Form Component Test Show categories dropdownlist" time="0.081">
+    </testcase>
+    <testcase classname="Product Form Component Test Change category after selected" name="Product Form Component Test Change category after selected" time="0.049">
     </testcase>
   </testsuite>
 </testsuites>

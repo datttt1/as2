@@ -30,7 +30,16 @@ const notNullProduct = {
 
 };
 
-jest.mock("../services/CategoryService.js");
+jest.mock("../services/CategoryService.js",()=>({
+    __esModule: true,
+    getAll: jest.fn().mockResolvedValue(categoriesMock)
+}));
+jest.mock("../services/ProductService.js", () => ({
+  __esModule: true,
+  getAll: jest.fn(),
+  create: jest.fn(),
+  update: jest.fn(),
+}));
 
 describe("Product Form Component Test", () => {
     beforeEach(() => {
