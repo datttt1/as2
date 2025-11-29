@@ -4,22 +4,36 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.junit.jupiter.api.TestInstance;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.demo.dto.userDTO.LoginResponse;
 import com.example.demo.dto.userDTO.UserLoginRequest;
-@ExtendWith(MockitoExtension.class)
+import com.example.demo.entity.User;
+import com.example.demo.repository.UserRepository;
+
+@SpringBootTest  // Tạo Spring context để autowire
+@TestInstance(TestInstance.Lifecycle.PER_CLASS) 
 
  class AuthServiceTest {
+    @Autowired
     private AuthService authService;
+
+    @Autowired
+    private UserRepository userRepository;
     
-    @BeforeEach
+    @BeforeAll
     void setUp() {
-        authService = new AuthService();
+        userRepository.deleteAll();
+        User user = new User();
+        user.setUsername("admin1");
+        user.setPassword("admin123");
+        user.setEmail("admin123@gmail.com");
+        userRepository.save(user);
 
     }
 
@@ -27,8 +41,8 @@ import com.example.demo.dto.userDTO.UserLoginRequest;
 @DisplayName("Login Success")
     void testLoginSuccess () {
         UserLoginRequest req = new UserLoginRequest();
-        req.setUsername("testuser");
-        req.setPassword("testuser123"); 
+        req.setUsername("admin1");
+        req.setPassword("admin123"); 
 
         LoginResponse res = authService.authenticate(req);
         
@@ -42,8 +56,8 @@ import com.example.demo.dto.userDTO.UserLoginRequest;
 @DisplayName("Username not found")
     void testUsernameNotFound () {
         UserLoginRequest req = new UserLoginRequest();
-        req.setUsername("abc");
-        req.setPassword("testuser123");
+        req.setUsername("admin2");
+        req.setPassword("admin123");
 
         LoginResponse res = authService.authenticate(req);
 
@@ -55,8 +69,8 @@ import com.example.demo.dto.userDTO.UserLoginRequest;
 @DisplayName("Wrong Password")
     void testPassword () {
         UserLoginRequest req = new UserLoginRequest();
-        req.setUsername("testuser");
-        req.setPassword("testuser12");
+        req.setUsername("admin1");
+        req.setPassword("admin12345");
 
         LoginResponse res = authService.authenticate(req);
 
