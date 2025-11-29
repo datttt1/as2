@@ -25,7 +25,13 @@ const productsMock = [
 ]
 
 
-jest.mock("../services/ProductService.js");
+jest.mock("../services/ProductService.js",()=>({
+    __esModule: true,
+    create: jest.fn(),
+    update: jest.fn(),
+    deletee: jest.fn(),
+    getAll: jest.fn()
+}));
 
 
 describe("Product Mock Test", () => {

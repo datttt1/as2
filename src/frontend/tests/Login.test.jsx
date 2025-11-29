@@ -1,19 +1,25 @@
 import * as reactRouter from "react-router-dom";
 import Login from "../components/Login.jsx";
 import { render, screen,fireEvent } from "@testing-library/react";
+import * as loginService from "../services/AuthService.js";
 
 jest.mock("react-router-dom", () => {
     const actual = jest.requireActual("react-router-dom")
     return {
         ...actual,
-        useNavigate: jest.fn(),
+        useNavigate: jest.fn().mockResolvedValue({success: null, message: null, token: null}),
 
     }
 })
+jest.mock("../services/AuthService.js", () => ({
+    __esModule: true,
+    loginUser: jest.fn()
+}));
 describe("Login Component Test", () => {
     const navigateMock = jest.fn();
     beforeEach(() => {
         reactRouter.useNavigate.mockReturnValue(navigateMock);
+        window.alert = jest.fn();
         jest.clearAllMocks();
 
     })

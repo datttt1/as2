@@ -11,8 +11,15 @@ jest.mock("react-router-dom", () => {
         useLocation: jest.fn(),
     }
 })
-jest.mock("../services/ProductService.js");
-jest.mock("../services/CategoryService.js");
+jest.mock("../services/ProductService.js", () => ({
+    __esModule: true,
+    getAll: jest.fn().mockResolvedValue(productsMock),
+}));
+
+jest.mock("../services/CategoryService.js",()=>({
+    __esModule: true,
+    getAll: jest.fn().mockResolvedValue(categoriesMock)
+}));
 const productsMock = [
     { id: 1, name: "Product 1", price: 100, quantity: 200, description: "Product 1 description", category: { id: 1, name: "category 1", description: "category 1 description" } },
     { id: 2, name: "Product 2", price: 200, quantity: 300, description: "Product 2 description", category: { id: 2, name: "category 2", description: "category 2 description" } },
@@ -25,8 +32,6 @@ const categoriesMock = [
     { id: 1, name: "category 1", description: "category 1 description" },
     { id: 2, name: "category 2", description: "category 2 description" }
 ]
-getAllProducts.mockResolvedValue(productsMock);
-getAllCategories.mockResolvedValue(categoriesMock);
 
 describe("ProductList Component Test", () => {
     beforeEach(() => {

@@ -21,16 +21,20 @@ const categoriesMock = [
     { id: 2, name: "category 2", description: "category 2 description" }
 ]
 
-jest.mock("../services/ProductService.js");
-jest.mock("../services/CategoryService.js");
-getAllCategories.mockResolvedValue(categoriesMock);
-getAllProducts.mockResolvedValue(productsMock);
-deleteProduct.mockResolvedValue({
-    status: 200,
-    data: {
-        message: "Product deleted successfully"
-    }
-});
+jest.mock("../services/ProductService.js", () => ({
+    __esModule: true,
+    getAll: jest.fn().mockResolvedValue(productsMock),
+    deletee: jest.fn().mockResolvedValue({
+        status: 200,
+        data: {
+            message: "Product deleted successfully"
+        }
+    })
+}));
+jest.mock("../services/CategoryService.js",()=>({
+    __esModule: true,
+    getAll: jest.fn().mockResolvedValue(categoriesMock)
+}));
 
 describe("Product List Component Integration Test", () => {
     const mockNavigate = jest.fn();
@@ -165,7 +169,7 @@ describe("Product List Component Integration Test", () => {
 
         fireEvent.click(deleteButton);
 
-        await waitFor(()=>{
+        await waitFor(() => {
             expect(screen.getByRole("alert")).toHaveTextContent("Deleted product successfully");
         })
     })

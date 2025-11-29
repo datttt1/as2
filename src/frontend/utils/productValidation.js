@@ -14,7 +14,7 @@ export function validateProduct(product) {
         errors.name = 'Tên sản phẩm không được quá 100 ký tự'
 
     // Price 
-    if (/[^0-9-]/.test(price))
+    if (/[^0-9-.]/.test(price))
         errors.price = 'Giá sản phẩm phải là số'
 
     else if (price <= 0)
@@ -25,7 +25,7 @@ export function validateProduct(product) {
 
     // Quantity 
     if (/[^0-9-]/.test(quantity))
-        errors.quantity = 'Số lượng sản phẩm phải là số'
+        errors.quantity = 'Số lượng sản phẩm phải là số nguyên dương'
 
     else if (quantity < 0)
         errors.quantity = 'Số lượng sản phẩm phải lớn hơn hoặc bằng 0';

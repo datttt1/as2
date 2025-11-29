@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="51" failures="0" errors="0" time="5.615">
+  <testsuite name="Product Mock Test" errors="0" failures="0" skipped="0" timestamp="2025-11-29T05:03:12" time="1.395" tests="8">
+    <testcase classname="Product Mock Test Create product successful" name="Product Mock Test Create product successful" time="0.016">
+    </testcase>
+    <testcase classname="Product Mock Test Update product successful" name="Product Mock Test Update product successful" time="0.002">
+    </testcase>
+    <testcase classname="Product Mock Test Delete product successful" name="Product Mock Test Delete product successful" time="0.003">
+    </testcase>
+    <testcase classname="Product Mock Test Get all products successful" name="Product Mock Test Get all products successful" time="0.002">
+    </testcase>
+    <testcase classname="Product Mock Test Create product failed" name="Product Mock Test Create product failed" time="0.003">
+    </testcase>
+    <testcase classname="Product Mock Test Update product failed" name="Product Mock Test Update product failed" time="0.002">
+    </testcase>
+    <testcase classname="Product Mock Test Delete product failed" name="Product Mock Test Delete product failed" time="0.001">
+    </testcase>
+    <testcase classname="Product Mock Test Get all products failed" name="Product Mock Test Get all products failed" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="Login Validation Tests" errors="0" failures="0" skipped="0" timestamp="2025-11-29T05:03:12" time="2.072" tests="11">
+    <testcase classname="Login Validation Tests TC1: Username rỗng" name="Login Validation Tests TC1: Username rỗng" time="0.079">
+    </testcase>
+    <testcase classname="Login Validation Tests TC2: Username quá ngắn" name="Login Validation Tests TC2: Username quá ngắn" time="0.001">
+    </testcase>
+    <testcase classname="Login Validation Tests TC3: Username quá dài" name="Login Validation Tests TC3: Username quá dài" time="0.001">
+    </testcase>
+    <testcase classname="Login Validation Tests TC4: Username chứa khoảng trắng" name="Login Validation Tests TC4: Username chứa khoảng trắng" time="0.002">
+    </testcase>
+    <testcase classname="Login Validation Tests TC5: Username chứa ký tự đặc biệt" name="Login Validation Tests TC5: Username chứa ký tự đặc biệt" time="0.001">
+    </testcase>
+    <testcase classname="Login Validation Tests TC6 : Password rỗng" name="Login Validation Tests TC6 : Password rỗng" time="0.001">
+    </testcase>
+    <testcase classname="Login Validation Tests TC7 : Password quá ngắn" name="Login Validation Tests TC7 : Password quá ngắn" time="0.001">
+    </testcase>
+    <testcase classname="Login Validation Tests TC8 : Password quá dài" name="Login Validation Tests TC8 : Password quá dài" time="0.001">
+    </testcase>
+    <testcase classname="Login Validation Tests TC9 : Password không chứa cả chữ và số" name="Login Validation Tests TC9 : Password không chứa cả chữ và số" time="0.002">
+    </testcase>
+    <testcase classname="Login Validation Tests TC10: Username hợp lệ" name="Login Validation Tests TC10: Username hợp lệ" time="0">
+    </testcase>
+    <testcase classname="Login Validation Tests TC11: Password hợp lệ" name="Login Validation Tests TC11: Password hợp lệ" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="Product Validation Tests" errors="0" failures="0" skipped="0" timestamp="2025-11-29T05:03:12" time="2.19" tests="14">
+    <testcase classname="Product Validation Tests TC1: Tên sản phẩm rỗng" name="Product Validation Tests TC1: Tên sản phẩm rỗng" time="0.013">
+    </testcase>
+    <testcase classname="Product Validation Tests TC2: Tên sản phẩm quá ngắn" name="Product Validation Tests TC2: Tên sản phẩm quá ngắn" time="0.002">
+    </testcase>
+    <testcase classname="Product Validation Tests TC3: Tên sản phẩm quá dài" name="Product Validation Tests TC3: Tên sản phẩm quá dài" time="0.001">
+    </testcase>
+    <testcase classname="Product Validation Tests TC4: Giá sản phẩm không phải là số" name="Product Validation Tests TC4: Giá sản phẩm không phải là số" time="0.001">
+    </testcase>
+    <testcase classname="Product Validation Tests TC5: Giá sản phẩm âm" name="Product Validation Tests TC5: Giá sản phẩm âm" time="0.002">
+    </testcase>
+    <testcase classname="Product Validation Tests TC6: Giá sản phẩm quá lớn" name="Product Validation Tests TC6: Giá sản phẩm quá lớn" time="0.001">
+    </testcase>
+    <testcase classname="Product Validation Tests TC6.1: Giá sản phẩm là số thập phân" name="Product Validation Tests TC6.1: Giá sản phẩm là số thập phân" time="0.002">
+    </testcase>
+    <testcase classname="Product Validation Tests TC7: Số lượng sản phẩm không phải là số" name="Product Validation Tests TC7: Số lượng sản phẩm không phải là số" time="0.002">
+    </testcase>
+    <testcase classname="Product Validation Tests TC8: Số lượng sản phẩm âm" name="Product Validation Tests TC8: Số lượng sản phẩm âm" time="0.002">
+    </testcase>
+    <testcase classname="Product Validation Tests TC9: Số lượng sản phẩm quá lớn" name="Product Validation Tests TC9: Số lượng sản phẩm quá lớn" time="0.001">
+    </testcase>
+    <testcase classname="Product Validation Tests TC10: Mô tả sản phẩm quá dài" name="Product Validation Tests TC10: Mô tả sản phẩm quá dài" time="0.001">
+    </testcase>
+    <testcase classname="Product Validation Tests TC11: Danh mục sản phẩm rỗng" name="Product Validation Tests TC11: Danh mục sản phẩm rỗng" time="0.001">
+    </testcase>
+    <testcase classname="Product Validation Tests TC12: Danh mục sản phẩm không có sẵn" name="Product Validation Tests TC12: Danh mục sản phẩm không có sẵn" time="0.001">
+    </testcase>
+    <testcase classname="Product Validation Tests TC13: Sản phẩm hợp lệ" name="Product Validation Tests TC13: Sản phẩm hợp lệ" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="Product Detail Component Test" errors="0" failures="0" skipped="0" timestamp="2025-11-29T05:03:12" time="2.474" tests="1">
+    <testcase classname="Product Detail Component Test Show product detail info" name="Product Detail Component Test Show product detail info" time="0.25">
+    </testcase>
+  </testsuite>
+  <testsuite name="Login Component Test" errors="0" failures="0" skipped="0" timestamp="2025-11-29T05:03:12" time="2.897" tests="2">
+    <testcase classname="Login Component Test Login rendering" name="Login Component Test Login rendering" time="0.136">
+    </testcase>
+    <testcase classname="Login Component Test Change username input and password input" name="Login Component Test Change username input and password input" time="0.037">
+    </testcase>
+  </testsuite>
+  <testsuite name="Login Integration Test" errors="0" failures="0" skipped="0" timestamp="2025-11-29T05:03:12" time="2.919" tests="2">
+    <testcase classname="Login Integration Test Show errors when submit empty username and password" name="Login Integration Test Show errors when submit empty username and password" time="0.153">
+    </testcase>
+    <testcase classname="Login Integration Test Login successful" name="Login Integration Test Login successful" time="0.041">
+    </testcase>
+  </testsuite>
+  <testsuite name="Login Mock Test" errors="0" failures="0" skipped="0" timestamp="2025-11-29T05:03:12" time="3.132" tests="2">
+    <testcase classname="Login Mock Test Login successful" name="Login Mock Test Login successful" time="0.231">
+    </testcase>
+    <testcase classname="Login Mock Test Login failed with wrong password" name="Login Mock Test Login failed with wrong password" time="0.104">
+    </testcase>
+  </testsuite>
+  <testsuite name="ProductList Component Test" errors="0" failures="0" skipped="0" timestamp="2025-11-29T05:03:12" time="3.186" tests="1">
+    <testcase classname="ProductList Component Test Render Component" name="ProductList Component Test Render Component" time="0.249">
+    </testcase>
+  </testsuite>
+  <testsuite name="Product Form Component Test" errors="0" failures="0" skipped="0" timestamp="2025-11-29T05:03:12" time="3.32" tests="4">
+    <testcase classname="Product Form Component Test Show product info when update" name="Product Form Component Test Show product info when update" time="0.088">
+    </testcase>
+    <testcase classname="Product Form Component Test Show empty product info when create" name="Product Form Component Test Show empty product info when create" time="0.03">
+    </testcase>
+    <testcase classname="Product Form Component Test Show categories dropdownlist" name="Product Form Component Test Show categories dropdownlist" time="0.096">
+    </testcase>
+    <testcase classname="Product Form Component Test Change category after selected" name="Product Form Component Test Change category after selected" time="0.041">
+    </testcase>
+  </testsuite>
+  <testsuite name="Product List Component Integration Test" errors="0" failures="0" skipped="0" timestamp="2025-11-29T05:03:12" time="3.408" tests="4">
+    <testcase classname="Product List Component Integration Test Navigate to Product Form to edit product" name="Product List Component Integration Test Navigate to Product Form to edit product" time="0.237">
+    </testcase>
+    <testcase classname="Product List Component Integration Test Navigate to Product Form to add new product" name="Product List Component Integration Test Navigate to Product Form to add new product" time="0.058">
+    </testcase>
+    <testcase classname="Product List Component Integration Test Navigate to Product Detail" name="Product List Component Integration Test Navigate to Product Detail" time="0.078">
+    </testcase>
+    <testcase classname="Product List Component Integration Test Delete product" name="Product List Component Integration Test Delete product" time="0.091">
+    </testcase>
+  </testsuite>
+  <testsuite name="Product Form Integration Test" errors="0" failures="0" skipped="0" timestamp="2025-11-29T05:03:12" time="3.713" tests="2">
+    <testcase classname="Product Form Integration Test Add new Product Successful" name="Product Form Integration Test Add new Product Successful" time="0.374">
+    </testcase>
+    <testcase classname="Product Form Integration Test Update Product Successful" name="Product Form Integration Test Update Product Successful" time="0.067">
+    </testcase>
+  </testsuite>
+</testsuites>

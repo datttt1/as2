@@ -17,6 +17,10 @@ public class ProductService {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    public ProductService(ProductRepository productRepository, CategoryRepository categoryRepository) {
+        this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
+    }
     private void isValidProduct(Product product) {
         if(product.getName() == null        || 
            product.getName().length() < 3   ||

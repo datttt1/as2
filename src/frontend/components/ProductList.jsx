@@ -67,7 +67,6 @@ const ProductList = () => {
             }
         };
         fetchProductsCategories();
-        console.log("fetch Products");
     }, []);
 
     return (
@@ -106,8 +105,10 @@ const ProductList = () => {
                     {flash && (
                         <label role="alert" style={{
                             color: "green",
-                            fontSize:"25",
-                        }}>
+                            fontSize:"30",
+                            
+                        }}
+                        data-testid="message">
                             {flash}
                         </label>
                     )}
@@ -172,7 +173,7 @@ const ProductList = () => {
                                                     borderTopLeftRadius: "5px",
                                                     borderBottomLeftRadius: "5px",
                                                 }}>{product.id}</td>
-                                                <td>{product.name}</td>
+                                                <td data-testid="product-name">{product.name}</td>
                                                 <td>{product.price}</td>
                                                 <td>{product.quantity}</td>
                                                 <td>{product.category.name}</td>
@@ -200,6 +201,7 @@ const ProductList = () => {
                                                             cursor: "pointer",
                                                             backgroundColor: "transparent",
                                                         }}
+                                                            data-testid={`edit-button-${product.id}`}
                                                             onClick={(e) => {
                                                                 e.stopPropagation();
                                                                 handleProductForm(product);
@@ -220,9 +222,9 @@ const ProductList = () => {
                                                             padding: 0,
                                                             cursor: "pointer",
                                                             backgroundColor: "transparent",
-
-
+                                        
                                                         }}
+                                                            data-testid={`delete-button-${product.id}`}
                                                             onClick={(e) => {
                                                                 e.stopPropagation();
                                                                 handleDeletePoduct(product.id);

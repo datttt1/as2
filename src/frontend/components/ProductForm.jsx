@@ -136,6 +136,7 @@ const ProductForm = () => {
                                 flex: 1,
                             }}
                             inputProps={{
+                                'data-testid': 'category-input',
                                 style: {
                                     width: "100%",
                                     height: "100%",
@@ -146,6 +147,7 @@ const ProductForm = () => {
                                 }
                             }}
                             popupProps={{
+                                'data-test-id':'category-popup',
                                 style: {
                                     border: "1px solid black",
                                     padding: "10px",
@@ -177,6 +179,7 @@ const ProductForm = () => {
                         color: "white",
                         cursor: "pointer",
                     }}
+                        data-testid="submit-button"
                         onClick={() => {
                             const error = validateProduct(form);
                             setErrors(error);

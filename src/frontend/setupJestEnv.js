@@ -6,3 +6,5 @@ global.TextDecoder = TextDecoder;
 
 // Optional: mock fetch nếu dùng fetch
 global.fetch = global.fetch || jest.fn();
+// setupJestEnv.js
+process.env.VITE_API_URL = "http://localhost:8080";
