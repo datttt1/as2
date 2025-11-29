@@ -62,6 +62,16 @@ jobs:
       run: |
         cd src/frontend
         echo "VITE_API_URL=http://localhost:8080" > .env
+    
+    - name: Run Backend Tests
+      run: |
+        cd src/backend
+        mvn clean test
+
+    - name: Run Frontend Tests
+      run: |
+        cd src/frontend
+        npm test -- --coverage
 
     - name: Wait for MySQL to be ready
       run: |
@@ -79,24 +89,10 @@ jobs:
         sleep 10
         mysql -h 127.0.0.1 -P 3306 -u root -pnhattranxuan112 flogin < src/backend/db/flogin.sql
 
-    - name: Debug backend logs
-      run: |
-        tail -n 50 src/backend/logs/spring.log
-
     - name: Check DB contents
       run: |
         sudo apt-get install -y mysql-client
         mysql -h 127.0.0.1 -u root -pnhattranxuan112 -e "SELECT * FROM user;" flogin
-    - name: Run Backend Tests
-      run: |
-        cd src/backend
-        mvn clean test
-
-
-    - name: Run Frontend Tests
-      run: |
-        cd src/frontend
-        npm test -- --coverage
 
     - name: Start Backend server
       run: |
