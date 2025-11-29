@@ -53,12 +53,20 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y google-chrome-stable
+    
+        
+    - name: Create .env file
+      run: |
+        cd src/frontend
+        echo "VITE_API_URL=http://localhost:8080" > .env
+
+
 
     - name: Run Product tests
       run: |
         cd src/frontend
         npm test product
-        
+    
     
     - name: Wait for MySQL to be ready
       run: |
@@ -75,12 +83,6 @@ jobs:
         mvn -q spring-boot:run -Dspring-boot.run.fork=false &
         echo "Waiting for backend to start..."
         npx wait-on tcp:8080 --timeout 60000
-
-    - name: Create .env file
-      run: |
-        cd src/frontend
-        echo "VITE_API_URL=http://localhost:8080" > .env
-
 
     - name: Start frontend server
       run: |
