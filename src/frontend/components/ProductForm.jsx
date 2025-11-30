@@ -48,6 +48,7 @@ const ProductForm = () => {
                     })
                 
             } catch (error) {
+                console.log(error);
                 const message = error.response.data.error;
                 setErrors({ name: message });
             }
@@ -100,15 +101,15 @@ const ProductForm = () => {
                     <input id="name" value={form.name} onChange={e => {
                         setForm({ ...form, name: e.target.value });
                     }} />
-                    <p className='error-text'>{errors.name}</p>
+                    <p data-testid="name-error" className='error-text'>{errors.name}</p>
 
                     <label htmlFor="price">Price</label>
                     <input id="price" value={form.price} onChange={e => setForm({ ...form, price: e.target.value })} />
-                    <p className='error-text'>{errors.price}</p>
+                    <p data-testid="price-error" lassName='error-text'>{errors.price}</p>
 
                     <label htmlFor="quantity">Quantity</label>
                     <input id="quantity" value={form.quantity} onChange={e => setForm({ ...form, quantity: e.target.value })} />
-                    <p className='error-text'>{errors.quantity}</p>
+                    <p data-testid="quantity-error" className='error-text'>{errors.quantity}</p>
 
                     <label htmlFor="description">Description</label>
                     <textarea id="description" value={form.description} onChange={e => setForm({ ...form, description: e.target.value })}
@@ -155,7 +156,7 @@ const ProductForm = () => {
                             }}
                         ></Combobox>
                     </div>
-                    <p className='error-text'>{errors.category}</p>
+                    <p data-testid="category-error" lassName='error-text'>{errors.category}</p>
                 </form>
                 <div style={{
                     display: "flex",
