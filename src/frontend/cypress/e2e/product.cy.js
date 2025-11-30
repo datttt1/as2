@@ -4,6 +4,7 @@ const productPage = new ProductPage();
 
 describe("Product E2E Tests", () => {
   beforeEach(() => {
+    cy.viewport(1600,900);
     cy.intercept("GET", "**/api/category").as("getCategories");
     cy.intercept("GET", "**/api/product").as("getProducts");
     cy.intercept("POST", "**/api/product").as("createProduct");
@@ -34,6 +35,7 @@ describe("Product E2E Tests", () => {
     });
 
     productPage.submitProductForm();
+
 
     productPage.getProductInList("Test Product").should("be.visible");
 
