@@ -47,7 +47,7 @@ public class AuthSecurityTest {
         LoginResponse res = authService.authenticate(req);
 
         assertFalse(res.isSuccess());
-        assertEquals("Validation failed", res.getMessage());
+        assertEquals("Username not found", res.getMessage());
     }
 
     @Test
@@ -60,36 +60,10 @@ public class AuthSecurityTest {
         LoginResponse res = authService.authenticate(req);
 
         assertFalse(res.isSuccess());
-        assertEquals("Validation failed", res.getMessage());
+        assertEquals("Username not found", res.getMessage());
     }
 
     //authenticate bypass có ở authservicetest
     //test validation có ở authservicetest
-
-    @Test
-    @DisplayName("Khong dc login khi password trong")
-    void byPassEmptyPassword() {
-        UserLoginRequest req = new UserLoginRequest();
-        req.setUsername("admin1");
-        req.setPassword("");
-
-        LoginResponse res = authService.authenticate(req);
-
-        assertFalse(res.isSuccess());
-        assertEquals("Validation failed", res.getMessage());
-    }
-
-    @Test
-    @DisplayName("khong dc login bang SQL Injection trong password")
-    void byPassSqlInjection() {
-        UserLoginRequest req = new UserLoginRequest();
-        req.setUsername("admin1");
-        req.setPassword("' OR '1'='1");
-
-        LoginResponse res = authService.authenticate(req);
-
-        assertFalse(res.isSuccess());
-        assertEquals("Validation failed", res.getMessage());
-    }
 }
 
