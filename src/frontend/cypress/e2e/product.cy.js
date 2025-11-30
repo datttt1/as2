@@ -4,7 +4,7 @@ const productPage = new ProductPage();
 
 describe("Product E2E Tests", () => {
   beforeEach(() => {
-    cy.viewport(1600,900);
+    cy.viewport(1920, 1080);
     cy.intercept("GET", "**/api/category").as("getCategories");
     cy.intercept("GET", "**/api/product").as("getProducts");
     cy.intercept("POST", "**/api/product").as("createProduct");
@@ -13,7 +13,6 @@ describe("Product E2E Tests", () => {
 
     cy.clearLocalStorage();
     productPage.navigateProductList();
-
 
     cy.wait("@getProducts");
     cy.wait("@getCategories");
@@ -90,5 +89,47 @@ describe("Product E2E Tests", () => {
     productPage.getMessage().should("contain", "Deleted product successfully");
 
   });
+  it("Should not update/create invalid product", () => {
+    productPage.clickCreateBtn();
+
+    cy.url().should("contain", "/products/form");
+
+    productPage.fillProductForm({
+      name: "@a",
+      description: "This is a test product",
+      price: "0",
+      quantity: "-10",
+      category: "Điện thoại"
+    });
+    productPage.submitProductForm();
+    cy.get('p[data-testid="name-error"').should("be.visible").should("not.be.empty");
+    cy.get('p[data-testid="price-error"').should("be.visible").should("not.be.empty");
+    cy.get('p[data-testid="quantity-error"').should("be.visible").should("not.be.empty");
+    cy.get('p[data-testid="category-error"').should("be.visible").should("be.empty");
+  })
+  it("Should not create product with duplicate name", () => {
+    productPage.clickCreateBtn();
+    cy.url().should("contain", "/products/form");
+    productPage.fillProductForm({
+      name: "iPhone 15",
+      description: "This is a test product",
+      price: "10",
+      quantity: "10",
+      category: "Điện thoại"
+    });
+    productPage.submitProductForm();
+
+    cy.get('p[data-testid="name-error"').should("be.visible").should("not.be.empty").should("contain", "Tên sản phẩm bị trùng");
+
+  })
+  it("Should not update product with duplicate name", () => {
+    productPage.clickEditBtn("iPhone 17");
+    cy.url().should("contain", "/products/form");
+    productPage.fillProductForm({
+      name: "iPhone 15"
+    });
+    productPage.submitProductForm();
+    cy.get('p[data-testid="name-error"').should("be.visible").should("not.be.empty").should("contain", "Tên sản phẩm bị trùng");
+  })
 
 })

@@ -34,7 +34,7 @@ export class ProductPage {
         if (category) {
             cy.get('[data-testid="category-input"]').click();
             cy.get('body')
-                .contains('[role="option"]', 'Điện thoại') // react-widgets mặc định role=option
+                .contains('[role="option"]', 'Điện thoại')
                 .click({ force: true });
         }
     }
@@ -49,4 +49,3 @@ export class ProductPage {
         return cy.get('label[data-testid="message"]');
     }
 }
-export default ProductPage;
