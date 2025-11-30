@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -18,7 +19,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.example.demo.controller.ProductController;
 import com.example.demo.dto.productDTO.ProductRequest;
@@ -147,5 +147,90 @@ import com.fasterxml.jackson.databind.ObjectMapper;
         mockMvc.perform(delete("/api/product/delete/1"))
                 .andExpect(status().isOk());
     }
+
+@Test
+@DisplayName("GET /api/product/get/{id} - Not Found")
+void testGetProductByIdNotFound() throws Exception {
+    when(productService.getProduct(1)).thenThrow(new RuntimeException("Khong tim thay san pham"));
+
+    mockMvc.perform(get("/api/product/get/1"))
+            .andExpect(status().isNotFound())
+            .andExpect(jsonPath("$.error").value("Khong tim thay san pham"));
+}
+
+@Test
+@DisplayName("GET /api/product/getbyname/{name} - Success")
+void testGetProductByName() throws Exception {
+    when(productService.getProductByName("Laptop")).thenReturn(product);
+
+    mockMvc.perform(get("/api/product/getbyname/Laptop"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.name").value("Laptop"));
+}
+
+@Test
+@DisplayName("GET /api/product/getbyname/{name} - Not Found")
+void testGetProductByNameNotFound() throws Exception {
+    when(productService.getProductByName("Mouse")).thenThrow(new RuntimeException("Khong tim thay san pham"));
+
+    mockMvc.perform(get("/api/product/getbyname/Mouse"))
+            .andExpect(status().isNotFound())
+            .andExpect(jsonPath("$.error").value("Khong tim thay san pham"));
+}
+
+@Test
+@DisplayName("POST /api/product/create - Fail due to exception")
+void testCreateProductFail() throws Exception {
+    ProductRequest request = new ProductRequest();
+    request.setName("Laptop");
+    request.setPrice(new BigDecimal("15000000"));
+    request.setQuantity(10);
+    request.setDescription("Gaming Laptop");
+    request.setCategory(category);
+
+    when(productService.createProduct(any(Product.class)))
+            .thenThrow(new RuntimeException("Tên sản phẩm bị trùng"));
+
+    mockMvc.perform(post("/api/product/create")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(objectMapper.writeValueAsString(request)))
+            .andExpect(status().isBadRequest())
+            .andExpect(jsonPath("$.error").value("Tên sản phẩm bị trùng"));
+}
+
+@Test
+@DisplayName("PUT /api/product/update - Fail due to exception")
+void testUpdateProductFail() throws Exception {
+    ProductRequest request = new ProductRequest();
+    request.setId(1);
+    request.setName("Laptop");
+    request.setPrice(new BigDecimal("15000000"));
+    request.setQuantity(10);
+    request.setDescription("Gaming Laptop");
+    request.setCategory(category);
+
+    when(productService.updateProduct(any(Integer.class), any(Product.class)))
+            .thenThrow(new RuntimeException("Tên sản phẩm bị trùng"));
+
+    mockMvc.perform(put("/api/product/update")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(objectMapper.writeValueAsString(request)))
+            .andExpect(status().isBadRequest())
+            .andExpect(jsonPath("$.error").value("Tên sản phẩm bị trùng"));
+}
+
+@Test
+@DisplayName("DELETE /api/product/delete/{id} - Fail")
+void testDeleteProductFail() throws Exception {
+    // Khi xóa id 999, service ném RuntimeException
+    doThrow(new RuntimeException("San pham ko ton tai"))
+        .when(productService).deleteProduct(999);
+
+    mockMvc.perform(delete("/api/product/delete/999"))
+            .andExpect(status().isNotFound())
+            .andExpect(jsonPath("$.error").value("San pham ko ton tai"));
+}
+
+
 
 }

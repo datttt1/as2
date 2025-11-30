@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -111,5 +112,120 @@ import com.example.demo.repository.ProductRepository;
         assertEquals(1,result.size());
 
     }
+
+@Test
+@DisplayName("Create product - name duplicate throws")
+void testCreateProductNameDuplicate() {
+    when(categoryRepository.existsById(1)).thenReturn(true);
+    when(productRepository.findByName("Laptop Dell")).thenReturn(product);
+
+    RuntimeException ex = assertThrows(RuntimeException.class, () ->
+        productService.createProduct(product)
+    );
+
+    assertEquals("Tên sản phẩm bị trùng", ex.getMessage());
+}
+
+@Test
+@DisplayName("Create product - invalid category throws")
+void testCreateProductInvalidCategory() {
+    product.getCategory().setId(2);
+    when(categoryRepository.existsById(2)).thenReturn(false);
+
+    RuntimeException ex = assertThrows(RuntimeException.class, () ->
+        productService.createProduct(product)
+    );
+
+    assertEquals("Category không hợp lệ hoặc không tồn tại!", ex.getMessage());
+}
+
+
+@Test
+void testInvalidNameTooShort() {
+    product.setName("ab");
+    RuntimeException ex = assertThrows(RuntimeException.class, () ->
+        productService.createProduct(product)
+    );
+    assertEquals("Tên sản phẩm phải từ 3-100 ký tự và không được rỗng!", ex.getMessage());
+}
+
+@Test
+void testInvalidPrice() {
+    product.setPrice(BigDecimal.ZERO);
+    RuntimeException ex = assertThrows(RuntimeException.class, () ->
+        productService.createProduct(product)
+    );
+    assertEquals("Giá sản phẩm phải > 0 và <= 999,999,999!", ex.getMessage());
+}
+
+@Test
+void testInvalidQuantity() {
+    product.setQuantity(-1);
+    RuntimeException ex = assertThrows(RuntimeException.class, () ->
+        productService.createProduct(product)
+    );
+    assertEquals("Số lượng phải >= 0 và <= 99,999!", ex.getMessage());
+}
+
+@Test
+void testInvalidDescription() {
+    product.setDescription("a".repeat(501));
+    RuntimeException ex = assertThrows(RuntimeException.class, () ->
+        productService.createProduct(product)
+    );
+    assertEquals("Mô tả không được vượt quá 500 ký tự!", ex.getMessage());
+}
+
+@Test
+void testUpdateProductNotFound() {
+    when(productRepository.findById(2)).thenReturn(Optional.empty());
+
+    RuntimeException ex = assertThrows(RuntimeException.class, () ->
+        productService.updateProduct(2, product)
+    );
+
+    assertEquals("Không tìm thấy sản phẩm!", ex.getMessage());
+}
+
+@Test
+void testUpdateProductNameDuplicate() {
+    Product other = new Product();
+    other.setId(2);
+    other.setName("Laptop Dell");
+
+    when(productRepository.findById(1)).thenReturn(Optional.of(product));
+    when(productRepository.findAll()).thenReturn(List.of(product, other));
+
+    RuntimeException ex = assertThrows(RuntimeException.class, () ->
+        productService.updateProduct(1, product)
+    );
+
+    assertEquals("Tên sản phẩm bị trùng", ex.getMessage());
+}
+
+
+@Test
+void testDeleteProductNotFound() {
+    when(productRepository.existsById(2)).thenReturn(false);
+
+    RuntimeException ex = assertThrows(RuntimeException.class, () ->
+        productService.deleteProduct(2)
+    );
+
+    assertEquals("San pham ko ton tai", ex.getMessage());
+}
+
+@Test
+void testGetProductByNameNotFound() {
+    when(productRepository.findByName("NonExistent")).thenReturn(null);
+
+    RuntimeException ex = assertThrows(RuntimeException.class, () ->
+        productService.getProductByName("NonExistent")
+    );
+
+    assertEquals("Khong tim thay san pham", ex.getMessage());
+}
+
+
     
 }
