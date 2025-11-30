@@ -70,7 +70,7 @@ public boolean isValidRequest (UserLoginRequest req) {
         return password != null && password.matches(regex);
     }
 
-        public String hashPassword(String rawPassword) {
+    public String hashPassword(String rawPassword) {
         return encoder.encode(rawPassword);
     }
 
