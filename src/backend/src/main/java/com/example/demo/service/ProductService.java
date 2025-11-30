@@ -47,10 +47,20 @@ public class ProductService {
             !categoryRepository.existsById(product.getCategory().getId())) {
             throw new RuntimeException("Category không hợp lệ hoặc không tồn tại!");
         }
+
+        Product productExisting = productRepository.findByName(product.getName());
+        if(productExisting != null) {
+            throw new RuntimeException("Sản phẩm này đã có");
+        }
     }
 
     public Product createProduct(Product product) {
         isValidProduct(product);
+        Product productExisting = productRepository.findByName(product.getName());
+        if(productExisting != null) {
+            throw new RuntimeException("Sản phẩm bị trùng");
+        }
+
         return productRepository.save(product);
     }
 
