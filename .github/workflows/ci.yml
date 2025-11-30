@@ -133,6 +133,7 @@ jobs:
       uses : codecov/codecov-action@v2
       with :
         files : src/frontend/coverage/lcov.info,src/backend/target/site/jacoco/jacoco.xml
+        token: ${{secrets.CODECOV_TOKEN}}
 
 
 
