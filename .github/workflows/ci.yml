@@ -100,12 +100,6 @@ jobs:
     - name: Generate HTML report
       run: npx mochawesome-report-generator src/frontend/cypress/report.json -o src/frontend/reports --inline
 
-      # Upload HTML report as artifact
-    - name: Upload Cypress Report
-      uses: actions/upload-artifact@v4
-      with:
-        name: cypress-report
-        path: src/frontend/reports
 
     - name: Run Backend Tests
       run: |
@@ -116,6 +110,13 @@ jobs:
       run: |
         cd src/frontend
         npm test -- --coverage
+          # Upload HTML report as artifact
+          
+    - name: Upload Cypress Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: cypress-report
+        path: src/frontend/reports
 
     - name : Upload Coverage
       uses : codecov/codecov-action@v2
