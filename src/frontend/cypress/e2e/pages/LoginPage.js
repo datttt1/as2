@@ -3,8 +3,8 @@ export class LoginPage {
         usernameInput: () => cy.get('input[name="username"]'),
         passwordInput: () => cy.get('input[name="password"]'),
         submitBtn: () => cy.get('button').contains('Login'),
-        usernameError: () => cy.get('label[name="username-error"]'),
-        passwordError: () => cy.get('label[name="password-error"]'),
+        usernameError: () => cy.get('label[data-testid="username-error"]'),
+        passwordError: () => cy.get('label[data-testid="password-error"]'),
     }
 
     navigate() {
