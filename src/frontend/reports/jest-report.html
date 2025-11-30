@@ -1,0 +1,277 @@
+<html><head><meta charset="utf-8"/><title>Test Report</title><style type="text/css">:root {
+  --text-primary: #111;
+  --text-secondary: #4f4f4f;
+  --success: #006633;
+  --success-bright: #80ffbf;
+  --danger: #cc071e;
+  --danger-bright: #fbdfe0;
+  --warning: #995c00;
+  --warning-bright: #ffeea8;
+  --panel: #eee;
+  --border: #949494;
+  --disabled: #6b6b6b;
+}
+
+html,
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  color: var(--text-primary);
+}
+body {
+  padding: 2rem 1rem;
+}
+.jesthtml-content {
+  margin: 0 auto;
+  max-width: 70rem;
+}
+header {
+  display: flex;
+  align-items: center;
+}
+#title {
+  margin: 0;
+  flex-grow: 1;
+}
+#logo {
+  height: 4rem;
+}
+#timestamp {
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+#metadata-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.additional-information-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+}
+
+/** SUMMARY */
+#summary {
+  color: var(--text-primary);
+  display: flex;
+  font-family: monospace;
+  font-size: 1rem;
+}
+#summary > div {
+  margin-right: 0.5rem;
+  background: var(--panel);
+  padding: 1rem;
+  min-width: 15rem;
+}
+#summary > div:last-child {
+  margin-right: 0;
+}
+@media only screen and (max-width: 720px) {
+  #summary {
+    flex-direction: column;
+  }
+  #summary > div {
+    margin-right: 0;
+    margin-top: 1rem;
+  }
+  #summary > div:first-child {
+    margin-top: 0;
+  }
+}
+
+.summary-total {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.summary-passed {
+  color: var(--success);
+  border-left: 0.4rem solid var(--success);
+  padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+.summary-failed,
+.summary-obsolete-snapshots {
+  color: var(--danger);
+  border-left: 0.4rem solid var(--danger);
+  padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+.summary-pending {
+  color: var(--warning);
+  border-left: 0.4rem solid var(--warning);
+  padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+.summary-empty {
+  color: var(--disabled);
+  border-left: 0.4rem solid var(--disabled);
+  margin-bottom: 0.15rem;
+}
+
+.test-result {
+  padding: 1rem;
+  margin-bottom: 0.25rem;
+}
+.test-result:last-child {
+  border: 0;
+}
+.test-result.passed {
+  background-color: var(--success-bright);
+  color: var(--success);
+}
+.test-result.failed {
+  background-color: var(--danger-bright);
+  color: var(--danger);
+}
+.test-result.pending {
+  background-color: var(--warning-bright);
+  color: var(--warning);
+}
+
+.test-info {
+  display: flex;
+  justify-content: space-between;
+}
+.test-suitename {
+  width: 20%;
+  text-align: left;
+  font-weight: bold;
+  word-break: break-word;
+}
+.test-title {
+  width: 40%;
+  text-align: left;
+  font-style: italic;
+}
+.test-status {
+  width: 20%;
+  text-align: right;
+}
+.test-duration {
+  width: 10%;
+  text-align: right;
+  font-size: 0.85rem;
+}
+
+.failureMessages {
+  padding: 0 1rem;
+  margin-top: 1rem;
+  border-top: 1px dashed var(--danger);
+}
+.failureMessages.suiteFailure {
+  border-top: none;
+}
+.failureMsg {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
+.suite-container {
+  margin-bottom: 1rem;
+}
+.suite-info {
+  padding: 1rem;
+  background-color: var(--panel);
+  color: var(--text-secondary);
+  border: 0.15rem solid;
+  border-color: var(--panel);
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+.suite-info:hover {
+  border-color: var(--border);
+  cursor: pointer;
+}
+.suite-info .suite-path {
+  word-break: break-all;
+  flex-grow: 1;
+  font-family: monospace;
+  font-size: 1rem;
+}
+.suite-info .suite-time {
+  margin-left: 1rem;
+  padding: 0.2rem 0.3rem;
+  font-size: 0.85rem;
+}
+.suite-info .suite-time.warn {
+  background-color: var(--danger);
+  color: #fff;
+}
+.suite-info:before {
+  content: "\2303";
+  display: inline-block;
+  margin-right: 1rem;
+  transform: rotate(180deg) translateY(0.15rem);
+}
+.suite-container[open] .suite-info:before {
+  transform: rotate(0deg) translateY(0.15rem);
+}
+
+/* CONSOLE LOGS */
+.suite-consolelog {
+  margin-bottom: 0.25rem;
+  padding: 1rem;
+  background-color: var(--panel);
+}
+.suite-consolelog-header {
+  font-weight: bold;
+}
+.suite-consolelog-item {
+  padding: 0.5rem;
+}
+.suite-consolelog-item pre {
+  margin: 0.5rem 0;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.suite-consolelog-item-origin {
+  color: var(--text-secondary);
+  font-weight: bold;
+}
+.suite-consolelog-item-message {
+  color: var(--text-primary);
+  font-size: 1rem;
+  padding: 0 0.5rem;
+}
+
+/* OBSOLETE SNAPSHOTS */
+.suite-obsolete-snapshots {
+  margin-bottom: 0.25rem;
+  padding: 1rem;
+  background-color: var(--danger-bright);
+  color: var(--danger);
+}
+.suite-obsolete-snapshots-header {
+  font-weight: bold;
+}
+.suite-obsolete-snapshots-item {
+  padding: 0.5rem;
+}
+.suite-obsolete-snapshots-item pre {
+  margin: 0.5rem 0;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.suite-obsolete-snapshots-item-message {
+  color: var(--text-primary);
+  font-size: 1rem;
+  padding: 0 0.5rem;
+}
+</style></head><body><main class="jesthtml-content"><header><h1 id="title">Test Report</h1></header><section id="metadata-container"><div id="timestamp">Started: 2025-11-30 21:39:12</div><div id="summary"><div id="suite-summary"><div class="summary-total">Suites (11)</div><div class="summary-passed ">11 passed</div><div class="summary-failed  summary-empty">0 failed</div><div class="summary-pending  summary-empty">0 pending</div></div><div id="test-summary"><div class="summary-total">Tests (57)</div><div class="summary-passed ">57 passed</div><div class="summary-failed  summary-empty">0 failed</div><div class="summary-pending  summary-empty">0 pending</div></div></div></section><details id="suite-1" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">D:\VSCode\Assignment2\as2\src\frontend\tests\Product.mock.test.jsx</div><div class="suite-time">2.425s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Mock Test</div><div class="test-title">Create product successful</div><div class="test-status">passed</div><div class="test-duration">0.016s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Mock Test</div><div class="test-title">Update product successful</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Mock Test</div><div class="test-title">Delete product successful</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Mock Test</div><div class="test-title">Get all products successful</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Mock Test</div><div class="test-title">Create product failed</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Mock Test</div><div class="test-title">Update product failed</div><div class="test-status">passed</div><div class="test-duration">0.008s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Mock Test</div><div class="test-title">Delete product failed</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Mock Test</div><div class="test-title">Get all products failed</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div></div></details><details id="suite-2" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">D:\VSCode\Assignment2\as2\src\frontend\tests\productValidation.test.js</div><div class="suite-time">2.591s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Validation Tests</div><div class="test-title">TC1: Tên sản phẩm rỗng</div><div class="test-status">passed</div><div class="test-duration">0.014s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Validation Tests</div><div class="test-title">TC2: Tên sản phẩm quá ngắn</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Validation Tests</div><div class="test-title">TC3: Tên sản phẩm quá dài</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Validation Tests</div><div class="test-title">TC4: Giá sản phẩm không phải là số</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Validation Tests</div><div class="test-title">TC5: Giá sản phẩm âm</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Validation Tests</div><div class="test-title">TC6: Giá sản phẩm quá lớn</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Validation Tests</div><div class="test-title">TC6.1: Giá sản phẩm là số thập phân</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Validation Tests</div><div class="test-title">TC7: Số lượng sản phẩm không phải là số</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Validation Tests</div><div class="test-title">TC8: Số lượng sản phẩm âm</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Validation Tests</div><div class="test-title">TC9: Số lượng sản phẩm quá lớn</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Validation Tests</div><div class="test-title">TC10: Mô tả sản phẩm quá dài</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Validation Tests</div><div class="test-title">TC11: Danh mục sản phẩm rỗng</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Validation Tests</div><div class="test-title">TC12: Danh mục sản phẩm không có sẵn</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Validation Tests</div><div class="test-title">TC13: Sản phẩm hợp lệ</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div></div></details><details id="suite-3" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">D:\VSCode\Assignment2\as2\src\frontend\tests\loginValidation.test.js</div><div class="suite-time">2.691s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Login Validation Tests</div><div class="test-title">TC1: Username rỗng</div><div class="test-status">passed</div><div class="test-duration">0.011s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Login Validation Tests</div><div class="test-title">TC2: Username quá ngắn</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Login Validation Tests</div><div class="test-title">TC3: Username quá dài</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Login Validation Tests</div><div class="test-title">TC4: Username chứa khoảng trắng</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Login Validation Tests</div><div class="test-title">TC5: Username chứa ký tự đặc biệt</div><div class="test-status">passed</div><div class="test-duration">0.01s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Login Validation Tests</div><div class="test-title">TC6 : Password rỗng</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Login Validation Tests</div><div class="test-title">TC7 : Password quá ngắn</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Login Validation Tests</div><div class="test-title">TC8 : Password quá dài</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Login Validation Tests</div><div class="test-title">TC9 : Password không chứa cả chữ và số</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Login Validation Tests</div><div class="test-title">TC10: Username hợp lệ</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Login Validation Tests</div><div class="test-title">TC11: Password hợp lệ</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div></div></details><details id="suite-4" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">D:\VSCode\Assignment2\as2\src\frontend\tests\ProductDetail.test.jsx</div><div class="suite-time">3.237s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Detail Component Test</div><div class="test-title">Show product detail info</div><div class="test-status">passed</div><div class="test-duration">0.132s</div></div></div></div></details><details id="suite-5" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">D:\VSCode\Assignment2\as2\src\frontend\tests\Login.test.jsx</div><div class="suite-time">3.366s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Login Component Test</div><div class="test-title">Login rendering</div><div class="test-status">passed</div><div class="test-duration">0.141s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Login Component Test</div><div class="test-title">Change username input and password input</div><div class="test-status">passed</div><div class="test-duration">0.031s</div></div></div></div></details><details id="suite-6" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">D:\VSCode\Assignment2\as2\src\frontend\tests\Login.integration.test.jsx</div><div class="suite-time">3.54s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Login Integration Test</div><div class="test-title">Show errors when submit empty username and password</div><div class="test-status">passed</div><div class="test-duration">0.155s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Login Integration Test</div><div class="test-title">Login successful</div><div class="test-status">passed</div><div class="test-duration">0.024s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Login Integration Test</div><div class="test-title">Login failed with wrong password</div><div class="test-status">passed</div><div class="test-duration">0.036s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Login Integration Test</div><div class="test-title">Login failed with non existing username</div><div class="test-status">passed</div><div class="test-duration">0.046s</div></div></div></div></details><details id="suite-7" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">D:\VSCode\Assignment2\as2\src\frontend\tests\Login.mock.test.jsx</div><div class="suite-time">3.669s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Login Mock Test</div><div class="test-title">Login successful</div><div class="test-status">passed</div><div class="test-duration">0.228s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Login Mock Test</div><div class="test-title">Login failed with wrong password</div><div class="test-status">passed</div><div class="test-duration">0.093s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Login Mock Test</div><div class="test-title">Login failed with non existed username</div><div class="test-status">passed</div><div class="test-duration">0.089s</div></div></div></div></details><details id="suite-8" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">D:\VSCode\Assignment2\as2\src\frontend\tests\ProductList.test.jsx</div><div class="suite-time">3.708s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">ProductList Component Test</div><div class="test-title">Render Component</div><div class="test-status">passed</div><div class="test-duration">0.262s</div></div></div></div></details><details id="suite-9" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">D:\VSCode\Assignment2\as2\src\frontend\tests\ProductForm.test.jsx</div><div class="suite-time">3.805s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Form Component Test</div><div class="test-title">Show product info when update</div><div class="test-status">passed</div><div class="test-duration">0.136s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Form Component Test</div><div class="test-title">Show empty product info when create</div><div class="test-status">passed</div><div class="test-duration">0.021s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Form Component Test</div><div class="test-title">Show categories dropdownlist</div><div class="test-status">passed</div><div class="test-duration">0.076s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Form Component Test</div><div class="test-title">Change category after selected</div><div class="test-status">passed</div><div class="test-duration">0.029s</div></div></div></div></details><details id="suite-10" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">D:\VSCode\Assignment2\as2\src\frontend\tests\ProductList.integration.test.jsx</div><div class="suite-time">3.802s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product List Component Integration Test</div><div class="test-title">Navigate to Product Form to edit product</div><div class="test-status">passed</div><div class="test-duration">0.19s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product List Component Integration Test</div><div class="test-title">Navigate to Product Form to add new product</div><div class="test-status">passed</div><div class="test-duration">0.082s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product List Component Integration Test</div><div class="test-title">Navigate to Product Detail</div><div class="test-status">passed</div><div class="test-duration">0.064s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product List Component Integration Test</div><div class="test-title">Delete product</div><div class="test-status">passed</div><div class="test-duration">0.07s</div></div></div></div></details><details id="suite-11" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">D:\VSCode\Assignment2\as2\src\frontend\tests\ProductForm.integration.test.jsx</div><div class="suite-time">4.195s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Form Integration Test</div><div class="test-title">Add new Product Successful</div><div class="test-status">passed</div><div class="test-duration">0.253s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Form Integration Test</div><div class="test-title">Update Product Successful</div><div class="test-status">passed</div><div class="test-duration">0.054s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Form Integration Test</div><div class="test-title">Create Product with duplicate name</div><div class="test-status">passed</div><div class="test-duration">0.113s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Form Integration Test</div><div class="test-title">Update Product with duplicate name</div><div class="test-status">passed</div><div class="test-duration">0.046s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Product Form Integration Test</div><div class="test-title">Click Back button</div><div class="test-status">passed</div><div class="test-duration">0.015s</div></div></div></div></details></main></body></html>
