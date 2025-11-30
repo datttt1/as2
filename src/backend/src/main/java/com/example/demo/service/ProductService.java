@@ -50,17 +50,13 @@ public class ProductService {
 
         Product productExisting = productRepository.findByName(product.getName());
         if(productExisting != null) {
-            throw new RuntimeException("Sản phẩm này đã có");
+            throw new RuntimeException("Tên sản phẩm bị trùng");
         }
     }
 
     public Product createProduct(Product product) {
         isValidProduct(product);
         Product productExisting = productRepository.findByName(product.getName());
-        if(productExisting != null) {
-            throw new RuntimeException("Sản phẩm bị trùng");
-        }
-
         return productRepository.save(product);
     }
 
