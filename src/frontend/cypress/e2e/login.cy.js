@@ -24,8 +24,8 @@ describe("Login E2E Tests", () => {
 
     it("should login successfully with valid credentials", () => {
 
-        loginPage.typeUsername("user1");
-        loginPage.typePassword("user123");
+        loginPage.typeUsername("admin12");
+        loginPage.typePassword("admin123");
 
         loginPage.clickLogin();
 
@@ -33,8 +33,8 @@ describe("Login E2E Tests", () => {
         loginPage.getPasswordError().should('not.be.visible')
 
         cy.wait("@login",{timeout: 10000})
-
-        cy.url({timeout:10000}).should('contain', '/products');
+        
+        cy.url().should('contain', '/products');
         
         cy.get('label[data-testid="message"]').should('contain', 'Login successful');
     });

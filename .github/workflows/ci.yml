@@ -13,12 +13,12 @@ jobs:
       mysql:
         image: mysql:8
         env:
-          MYSQL_ROOT_PASSWORD: nhattranxuan112
+          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
           MYSQL_DATABASE: flogin
         ports:
           - 3306:3306
         options: >-
-          --health-cmd="mysqladmin ping --silent"
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot --password="
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
@@ -73,7 +73,7 @@ jobs:
         sudo apt-get install -y mysql-client
         echo "Waiting a few seconds for MySQL service..."
         sleep 10
-        mysql -h 127.0.0.1 -P 3306 -u root -pnhattranxuan112 flogin < src/backend/db/flogin.sql
+        mysql -h 127.0.0.1 -P 3306 -u root --password= flogin < src/backend/db/flogin.sql
 
     - name: Start Backend server
       run: |
