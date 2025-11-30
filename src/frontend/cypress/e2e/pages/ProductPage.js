@@ -33,7 +33,7 @@ export class ProductPage{
         }
         if(category){
             cy.get('[data-testid="category-input"]').click();
-            cy.get('[data-test-id="category-popup"]').contains(category).click({force:true});
+            cy.get('[data-testid="category-popup"]').contains(category).click({force:true});
         }
     }
     submitProductForm(){
