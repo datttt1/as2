@@ -61,6 +61,13 @@ public class ProductService {
 
     public Product updateProduct(Integer id, Product newproduct) {
         Product exsiting = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Không tìm thấy sản phẩm!"));
+        String nameNewProduct = newproduct.getName().trim().toLowerCase();
+        List<Product> list = productRepository.findAll();
+        for(Product p : list) {
+            if(p.getName().trim().toLowerCase().equals(nameNewProduct)) {
+                throw new RuntimeException("Đã có sản phẩm này");
+            }
+        }
 
         isValidProduct(newproduct);
 
