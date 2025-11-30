@@ -8,7 +8,7 @@ module.exports = {
   reporters: [
     "default",
     ["jest-html-reporter", {
-      "outputPath": "./reports/test-report.html",
+      "outputPath": "./reports/jest-report.html",
       "pageTitle": "Test Report"
     }]
   ]

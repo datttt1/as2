@@ -101,6 +101,19 @@ jobs:
         cd src/frontend
         npx cypress run --spec "cypress/e2e/login.cy.js" --config-file cypress.config.js
 
+    - name: Merge Mochawesome reports
+      run: npx mochawesome-merge src/frontend/cypress/reports/*.json > src/frontend/cypress/report.json
+
+    - name: Generate HTML report
+      run: npx mochawesome-report-generator src/frontend/cypress/report.json -o src/frontend/reports/e2e-login-report.html --inline
+      
+    - name: Upload Cypress Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: frontend-report
+        path: src/frontend/reports
+
+
 
 
 

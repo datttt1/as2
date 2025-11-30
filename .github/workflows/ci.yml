@@ -98,7 +98,7 @@ jobs:
       run: npx mochawesome-merge src/frontend/cypress/reports/*.json > src/frontend/cypress/report.json
 
     - name: Generate HTML report
-      run: npx mochawesome-report-generator src/frontend/cypress/report.json -o src/frontend/reports --inline
+      run: npx mochawesome-report-generator src/frontend/cypress/report.json -o src/frontend/reports/e2e-report.html --inline
 
 
     - name: Run Backend Tests
@@ -111,11 +111,11 @@ jobs:
         cd src/frontend
         npm test -- --coverage
           # Upload HTML report as artifact
-          
+
     - name: Upload Cypress Report
       uses: actions/upload-artifact@v4
       with:
-        name: cypress-report
+        name: frontend-report
         path: src/frontend/reports
 
     - name : Upload Coverage
