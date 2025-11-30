@@ -29,8 +29,8 @@ describe("Login E2E Tests", () => {
 
         loginPage.clickLogin();
 
-        loginPage.getUsernameError().should('not.be.visible')
-        loginPage.getPasswordError().should('not.be.visible')
+        loginPage.getUsernameError().should('not.exist')
+        loginPage.getPasswordError().should('not.exist')
 
         cy.wait("@login",{timeout: 10000})
 
