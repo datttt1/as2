@@ -66,8 +66,14 @@ public boolean isValidRequest (UserLoginRequest req) {
     }
 
     private boolean isValidPassword(String password) {
-        String regex = "^(?=.*[A-Za-z])(?=.*\\d).{6,100}$";
-        return password != null && password.matches(regex);
+    if (password == null) return false;
+
+    // Cấm các ký tự nguy hiểm thường dùng để injection
+    if (password.matches(".*['\";<>].*")) return false;
+
+    // Bắt buộc có chữ và số, 6-100 ký tự
+    String regex = "^(?=.*[A-Za-z])(?=.*\\d).{6,100}$";
+    return password.matches(regex);
     }
 
     public String hashPassword(String rawPassword) {
