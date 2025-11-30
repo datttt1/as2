@@ -53,15 +53,11 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y google-chrome-stable
 
-    - name: Run login tests
-      run: |
-        cd src/frontend
-        npm test login
-            
     - name: Create .env file
       run: |
         cd src/frontend
         echo "VITE_API_URL=http://localhost:8080" > .env
+    
 
     - name: Wait for MySQL to be ready
       run: |
@@ -75,7 +71,9 @@ jobs:
     - name: Import database schema
       run: |
         sudo apt-get install -y mysql-client
-        mysql -h 127.0.0.1 -u root -pnhattranxuan112 flogin < src/backend/db/flogin.sql
+        echo "Waiting a few seconds for MySQL service..."
+        sleep 10
+        mysql -h 127.0.0.1 -P 3306 -u root -pnhattranxuan112 flogin < src/backend/db/flogin.sql
 
     - name: Start Backend server
       run: |
@@ -90,22 +88,22 @@ jobs:
         cd src/frontend
         npm run dev &
         npx wait-on http://localhost:5173
-    - name: Run Backend Tests
-      run: |
-        cd src/backend
-        mvn clean test
-
-
-    - name: Run Frontend Tests
-      run: |
-        cd src/frontend
-        npm test -- --coverage
 
     - name: Run E2E Tests
       run: |
         cd src/frontend
         npm run test:e2e
     
+    - name: Run Backend Tests
+      run: |
+        cd src/backend
+        mvn clean test
+
+    - name: Run Frontend Tests
+      run: |
+        cd src/frontend
+        npm test -- --coverage
+
     - name : Upload Coverage
       uses : codecov/codecov-action@v2
       with :

@@ -15,15 +15,20 @@ jest.mock("react-router-dom", () => {
 })
 jest.mock("../services/AuthService.js", () => ({
     __esModule: true,
-    loginUser: jest.fn().mockResolvedValue({success: null, message: null, token: null})
+    loginUser: jest.fn().mockResolvedValue({
+        success: true,
+        message: "Login successful",
+        token: "mock-token-123"
+    })
 }));
-jest.mock("../services/CategoryService.js",()=>({
+jest.mock("../services/CategoryService.js", () => ({
     __esModule: true,
     getAll: jest.fn()
 }));
+
 jest.mock("../services/ProductService.js", () => ({
-  __esModule: true,
-  getAll: jest.fn(),
+    __esModule: true,
+    getAll: jest.fn(),
 }));
 
 describe("Login Integration Test", () => {
@@ -53,14 +58,15 @@ describe("Login Integration Test", () => {
     })
 
     test("Login successful", async () => {
+
         render(<Login />)
 
         const usernameInput = screen.getByPlaceholderText("Username");
         const passwordInput = screen.getByPlaceholderText("Password");
         const loginButton = screen.getByText("Login");
 
-        fireEvent.change(usernameInput, { target: { value: "testuser" } });
-        fireEvent.change(passwordInput, { target: { value: "testuser123" } });
+        fireEvent.change(usernameInput, { target: { value: "user1" } });
+        fireEvent.change(passwordInput, { target: { value: "user123" } });
 
         fireEvent.click(loginButton);
 
@@ -71,5 +77,12 @@ describe("Login Integration Test", () => {
             expect(passwordError.textContent.length).toBe(0);
         })
 
+        await waitFor(() => {
+            expect(loginService.loginUser).toHaveBeenCalledTimes(1);
+            expect(navigateMock).toHaveBeenCalledTimes(1);
+            expect(navigateMock).toHaveBeenCalledWith("/products", { state: { message: "Login successful" }, replace: true });
+
+
+        })
     })
 })
