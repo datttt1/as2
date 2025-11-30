@@ -30,9 +30,9 @@ import com.example.demo.repository.UserRepository;
     void setUp() {
         userRepository.deleteAll();
         User user = new User();
-        user.setUsername("admin1");
-        user.setPassword("admin123");
-        user.setEmail("admin123@gmail.com");
+        user.setUsername("admin12");
+        user.setPassword(authService.hashPassword("admin123"));
+        user.setEmail("admin12345@gmail.com");
         userRepository.save(user);
 
     }
@@ -41,7 +41,7 @@ import com.example.demo.repository.UserRepository;
 @DisplayName("Login Success")
     void testLoginSuccess () {
         UserLoginRequest req = new UserLoginRequest();
-        req.setUsername("admin1");
+        req.setUsername("admin12");
         req.setPassword("admin123"); 
 
         LoginResponse res = authService.authenticate(req);
@@ -69,7 +69,7 @@ import com.example.demo.repository.UserRepository;
 @DisplayName("Wrong Password")
     void testPassword () {
         UserLoginRequest req = new UserLoginRequest();
-        req.setUsername("admin1");
+        req.setUsername("admin12");
         req.setPassword("admin12345");
 
         LoginResponse res = authService.authenticate(req);

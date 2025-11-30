@@ -12,9 +12,9 @@ export let options = {
 };
 
 export default function () {
-    const url = 'http://localhost:8080/api/user/login';
+    const url = 'http://localhost:8080/api/auth/login';
     const payLoad = JSON.stringify({
-        username: "admin1",
+        username: "admin12",
         password: "admin123"
     });
 
