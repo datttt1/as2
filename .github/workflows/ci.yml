@@ -73,7 +73,7 @@ jobs:
         sudo apt-get install -y mysql-client
         echo "Waiting a few seconds for MySQL service..."
         sleep 10
-        mysql -h 127.0.0.1 -P 3306 -u root --password= flogin < src/backend/db/flogin.sql
+        mysql -h 127.0.0.1 -u root --password= flogin < src/backend/db/flogin.sql
 
     - name: Start Backend server
       run: |
