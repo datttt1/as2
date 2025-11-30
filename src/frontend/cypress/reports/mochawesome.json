@@ -1,0 +1,181 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-11-30T10:21:51.057Z",
+    "end": "2025-11-30T10:21:57.562Z",
+    "duration": 6505,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "bc955a59-8a74-4657-b371-b512ba7dfc28",
+      "title": "",
+      "fullFile": "cypress\\e2e\\login.cy.js",
+      "file": "cypress\\e2e\\login.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "9e830d02-d907-43cb-a54c-b0d640d0466d",
+          "title": "Login E2E Tests",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Should render all components",
+              "fullTitle": "Login E2E Tests Should render all components",
+              "timedOut": null,
+              "duration": 541,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('p').contains('Flogin').should('be.visible');\nloginPage.elements.usernameInput().should('be.visible');\nloginPage.elements.passwordInput().should('be.visible');\nloginPage.elements.submitBtn().should('be.visible');",
+              "err": {},
+              "uuid": "88677ff3-2812-45c7-b942-9b632ad50bef",
+              "parentUUID": "9e830d02-d907-43cb-a54c-b0d640d0466d",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should login successfully with valid credentials",
+              "fullTitle": "Login E2E Tests Should login successfully with valid credentials",
+              "timedOut": null,
+              "duration": 1457,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "loginPage.typeUsername(\"admin12\");\nloginPage.typePassword(\"admin123\");\nloginPage.clickLogin();\nloginPage.getUsernameError().should('not.be.visible');\nloginPage.getPasswordError().should('not.be.visible');\ncy.wait(\"@login\", {\n  timeout: 10000\n});\ncy.url().should('contain', '/products');\ncy.get('label[data-testid=\"message\"]').should('contain', 'Login successful');",
+              "err": {},
+              "uuid": "0a4cecf4-5274-4cbc-820f-2adab59c0214",
+              "parentUUID": "9e830d02-d907-43cb-a54c-b0d640d0466d",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should display error messages for invalid credentials",
+              "fullTitle": "Login E2E Tests Should display error messages for invalid credentials",
+              "timedOut": null,
+              "duration": 797,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "loginPage.typeUsername(\"a\");\nloginPage.typePassword(\"abc\");\nloginPage.clickLogin();\nloginPage.getUsernameError().should('have.length.greaterThan', 0);\nloginPage.getPasswordError().should('have.length.greaterThan', 0);",
+              "err": {},
+              "uuid": "015adff4-f1ee-409e-a4dd-785356b355e9",
+              "parentUUID": "9e830d02-d907-43cb-a54c-b0d640d0466d",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should login failed with wrong password",
+              "fullTitle": "Login E2E Tests Should login failed with wrong password",
+              "timedOut": null,
+              "duration": 1051,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "loginPage.typeUsername(\"admin12\");\nloginPage.typePassword(\"admin12345\");\nloginPage.clickLogin();\ncy.wait(\"@login\");\ncy.on(\"window:alert\", text => {\n  expect(text).to.equal(\"Wrong password\");\n});",
+              "err": {},
+              "uuid": "6490d08f-9a19-4717-b096-d048cabe14a0",
+              "parentUUID": "9e830d02-d907-43cb-a54c-b0d640d0466d",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should login failed with non-existent username",
+              "fullTitle": "Login E2E Tests Should login failed with non-existent username",
+              "timedOut": null,
+              "duration": 925,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "loginPage.typeUsername(\"admin1\");\nloginPage.typePassword(\"admin1235\");\nloginPage.clickLogin();\ncy.wait(\"@login\");\ncy.on(\"window:alert\", text => {\n  expect(text).to.equal(\"Username not found\");\n});",
+              "err": {},
+              "uuid": "33132754-bde9-4422-8657-1ee83b7d2b97",
+              "parentUUID": "9e830d02-d907-43cb-a54c-b0d640d0466d",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "88677ff3-2812-45c7-b942-9b632ad50bef",
+            "0a4cecf4-5274-4cbc-820f-2adab59c0214",
+            "015adff4-f1ee-409e-a4dd-785356b355e9",
+            "6490d08f-9a19-4717-b096-d048cabe14a0",
+            "33132754-bde9-4422-8657-1ee83b7d2b97"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 4771,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.3.2"
+    }
+  }
+}

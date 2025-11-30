@@ -93,11 +93,12 @@ jobs:
       run: |
         cd src/frontend
         npm run test:e2e
+
     - name: Merge Mochawesome reports
-      run: npx mochawesome-merge cypress/reports/*.json > src/frontend/cypress/report.json
+      run: npx mochawesome-merge src/frontend/cypress/reports/*.json > src/frontend/cypress/report.json
 
     - name: Generate HTML report
-      run: npx mochawesome-report-generator cypress/report.json -o src/frontend/cypress/report
+      run: npx mochawesome-report-generator src/frontend/cypress/report.json -o src/frontend/reports --inline
 
       # Upload HTML report as artifact
     - name: Upload Cypress Report
