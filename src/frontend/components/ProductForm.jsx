@@ -180,7 +180,6 @@ const ProductForm = () => {
                             const error = validateProduct(form);
                             setErrors(error);
                             if (Object.keys(error).length === 0) {
-                                console.log("No error in Product validation");
                                 handleSubmit();
                             }
                         }}>

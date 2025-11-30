@@ -17,8 +17,6 @@ const Login = () => {
         if (error.username === null && error.password === null) {
             try {
                 const user = await loginUser({username:username, password:password});
-                console.log("user:", user);
-
                 if (user.success) {
                     navigate("/products", { state: { message: "Login successful" }, replace: true });
                 } else {
@@ -26,7 +24,6 @@ const Login = () => {
                 }
             } catch (error) {
                 console.error(error);
-                alert("Login failed");
             }
         }
     }

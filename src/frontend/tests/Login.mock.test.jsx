@@ -34,14 +34,14 @@ describe("Login Mock Test", () => {
         })
         render(<Login />)
 
-        fireEvent.change(screen.getByPlaceholderText("Username"), { target: { value: "usertest" } })
-        fireEvent.change(screen.getByPlaceholderText("Password"), { target: { value: "usertest123" } })
+        fireEvent.change(screen.getByPlaceholderText("Username"), { target: { value: "admin12" } })
+        fireEvent.change(screen.getByPlaceholderText("Password"), { target: { value: "admin123" } })
 
         fireEvent.click(screen.getByText("Login"));
 
         await waitFor(() => {
             expect(authService.loginUser).toHaveBeenCalledTimes(1);
-            expect(authService.loginUser).toHaveBeenCalledWith({ username: "usertest", password: "usertest123" });
+            expect(authService.loginUser).toHaveBeenCalledWith({ username: "admin12", password: "admin123" });
             expect(mockNavigate).toHaveBeenCalledWith("/products", { state: { message: "Login successful" }, replace: true });
         })
     })
@@ -58,6 +58,30 @@ describe("Login Mock Test", () => {
 
         render(<Login />)
 
+        fireEvent.change(screen.getByPlaceholderText("Username"), { target: { value: "admin12" } })
+        fireEvent.change(screen.getByPlaceholderText("Password"), { target: { value: "user123" } })
+
+        fireEvent.click(screen.getByText("Login"));
+
+        await waitFor(() => {
+            expect(authService.loginUser).toHaveBeenCalledTimes(1);
+            expect(authService.loginUser).toHaveBeenCalledWith({ username: "admin12", password: "user123" });
+            expect(window.alert).toHaveBeenCalledWith("Wrong Password");
+            expect(mockNavigate).not.toHaveBeenCalled();
+        })
+
+    });
+    test("Login failed with non existed username", async () => {
+        window.alert = jest.fn();
+
+        authService.loginUser.mockResolvedValue({
+            success: false,
+            token: null,
+            message: "Username not found"
+        })
+
+        render(<Login />)
+
         fireEvent.change(screen.getByPlaceholderText("Username"), { target: { value: "testuser" } })
         fireEvent.change(screen.getByPlaceholderText("Password"), { target: { value: "user123" } })
 
@@ -66,10 +90,9 @@ describe("Login Mock Test", () => {
         await waitFor(() => {
             expect(authService.loginUser).toHaveBeenCalledTimes(1);
             expect(authService.loginUser).toHaveBeenCalledWith({ username: "testuser", password: "user123" });
-            expect(window.alert).toHaveBeenCalledWith("Wrong Password");
+            expect(window.alert).toHaveBeenCalledWith("Username not found");
             expect(mockNavigate).not.toHaveBeenCalled();
         })
-
     })
 
 })

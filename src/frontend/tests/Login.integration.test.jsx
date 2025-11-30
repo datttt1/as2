@@ -81,8 +81,64 @@ describe("Login Integration Test", () => {
             expect(loginService.loginUser).toHaveBeenCalledTimes(1);
             expect(navigateMock).toHaveBeenCalledTimes(1);
             expect(navigateMock).toHaveBeenCalledWith("/products", { state: { message: "Login successful" }, replace: true });
+        })
+    });
 
+    test("Login failed with wrong password", async () => {
+        loginService.loginUser.mockResolvedValueOnce({
+            success: false,
+            message: "Wrong Password",
+            token: null
+        })
 
+        render(<Login />)
+        const usernameInput = screen.getByPlaceholderText("Username");
+        const passwordInput = screen.getByPlaceholderText("Password");
+        const loginButton = screen.getByText("Login");
+
+        fireEvent.change(usernameInput, { target: { value: "admin12" } });
+        fireEvent.change(passwordInput, { target: { value: "user123" } });
+        fireEvent.click(loginButton);
+
+        await waitFor(() => {
+            const usernameError = screen.queryByTestId("username-error");
+            const passwordError = screen.queryByTestId("password-error");
+            expect(usernameError.textContent.length).toBe(0);
+            expect(passwordError.textContent.length).toBe(0);
+        })
+
+        await waitFor(() => {
+            expect(loginService.loginUser).toHaveBeenCalledTimes(1);
+            expect(window.alert).toHaveBeenCalledWith("Wrong Password");
+        })
+    });
+
+    test("Login failed with non existing username", async () => {
+        loginService.loginUser.mockResolvedValueOnce({
+            success: false,
+            message: "Username not found",
+            token: null
+        })
+
+        render(<Login />)
+        const usernameInput = screen.getByPlaceholderText("Username");
+        const passwordInput = screen.getByPlaceholderText("Password");
+        const loginButton = screen.getByText("Login");
+
+        fireEvent.change(usernameInput, { target: { value: "admin123" } });
+        fireEvent.change(passwordInput, { target: { value: "user123" } });
+        fireEvent.click(loginButton);
+
+        await waitFor(() => {
+            const usernameError = screen.queryByTestId("username-error");
+            const passwordError = screen.queryByTestId("password-error");
+            expect(usernameError.textContent.length).toBe(0);
+            expect(passwordError.textContent.length).toBe(0);
+        })
+
+        await waitFor(() => {
+            expect(loginService.loginUser).toHaveBeenCalledTimes(1);
+            expect(window.alert).toHaveBeenCalledWith("Username not found");
         })
     })
 })
