@@ -23,26 +23,22 @@ const ProductForm = () => {
         categories: product?.categories || [],
     });
     const [errors, setErrors] = useState({});
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (product.id) {
             try {
-                const updateProduct = async () => {
                     const res = await update(form);
-
                     navigate("/products", {
                         state: {
                             message: "Updated product successfully"
                         },
                         replace: true
                     })
-                }
-                updateProduct();
             } catch (error) {
-                console.log("Update product failed", error);
+                const message = error.response.data.error;
+                setErrors({ name: message });
             }
         } else {
             try {
-                const createProduct = async () => {
                     const res = await create(form);
                     navigate("/products", {
                         state: {
@@ -50,10 +46,10 @@ const ProductForm = () => {
                         },
                         replace: true
                     })
-                }
-                createProduct();
+                
             } catch (error) {
-                console.log("Create product failed", error);
+                const message = error.response.data.error;
+                setErrors({ name: message });
             }
 
         }

@@ -4,14 +4,7 @@ const loginPage = new LoginPage();
 
 describe("Login E2E Tests", () => {
     beforeEach(() => {
-        cy.intercept("POST","**/api/auth/login", {
-        statusCode: 200,
-        body: {
-        success: true,
-        message: "Login successful",
-        token: "fake-jwt-token",
-        user: { username: "user1", email: "user1@example.com" }
-  }}).as("login");
+        cy.intercept("POST","**/api/auth/login").as("login");
         cy.clearLocalStorage();
         loginPage.navigate();
     });

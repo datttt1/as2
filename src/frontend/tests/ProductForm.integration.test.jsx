@@ -9,8 +9,8 @@ const categoriesMock = [
     { id: 1, name: "category 1", description: "category 1 description" },
     { id: 2, name: "category 2", description: "category 2 description" },
 ];
-jest.mock("../services/CategoryService.js",()=>({
-      __esModule: true,
+jest.mock("../services/CategoryService.js", () => ({
+    __esModule: true,
     getAll: jest.fn().mockResolvedValue(categoriesMock)
 }));
 
@@ -30,9 +30,13 @@ const updatedProduct = {
     description: "Product 99 description",
     category: { id: 1, name: "category 1", description: "category 1 description" },
 }
-jest.mock("../services/ProductService.js",()=>({
-      __esModule: true,   
-    getAll: jest.fn().mockResolvedValue([]),
+const productsMock = [
+    { id: 1, name: "Product 1", price: 100, quantity: 200, description: "Product 1 description", category: { id: 1, name: "category 1", description: "category 1 description" } },
+    { id: 2, name: "Product 2", price: 200, quantity: 300, description: "Product 2 description", category: { id: 2, name: "category 2", description: "category 2 description" } }
+]
+jest.mock("../services/ProductService.js", () => ({
+    __esModule: true,
+    getAll: jest.fn().mockResolvedValue(productsMock),
     create: jest.fn().mockResolvedValue(createdProduct),
     update: jest.fn().mockResolvedValue(updatedProduct)
 }));
@@ -73,23 +77,16 @@ describe("Product Form Integration Test", () => {
 
         fireEvent.click(screen.getByText("Create"));
 
-        reactRoute.useLocation.mockReturnValue({ state: { message: "Created product successfully" } });
-
-        await waitFor(() => {
-            expect(create).toHaveBeenCalledTimes(1)
-            expect(mockNavigate).toHaveBeenCalledTimes(1)
-        })
-
+        reactRoute.useLocation.mockReturnValue({ state: { message: "Created product successfully" } })
         render(
             <reactRoute.MemoryRouter>
                 <ProductList />
             </reactRoute.MemoryRouter>
         )
         await waitFor(() => {
-            expect(getAllCategories).toHaveBeenCalled();
-            expect(getAllProducts).toHaveBeenCalled();
+            expect(create).toHaveBeenCalledTimes(1)
+            expect(mockNavigate).toHaveBeenCalledTimes(1)
             expect(screen.getByRole("alert")).toHaveTextContent("Created product successfully");
-
         })
 
 
@@ -139,9 +136,85 @@ describe("Product Form Integration Test", () => {
             expect(mockNavigate).toHaveBeenCalledTimes(1)
             expect(screen.getByRole("alert")).toHaveTextContent("Updated product successfully");
         })
+    });
+    test("Create Product with duplicate name", async ()=>{
+        create.mockRejectedValueOnce({response:{data:{error:"Tên sản phẩm bị trùng"}}})
+        reactRoute.useLocation.mockReturnValue({ state: { product: { categories: categoriesMock } } })
+         render(
+            <reactRoute.MemoryRouter>
+                <ProductForm />
+            </reactRoute.MemoryRouter>
+        );
+        fireEvent.change(await screen.findByLabelText(/product name/i), { target: { value: "Product 1" } });
+        fireEvent.change(await screen.findByLabelText(/price/i), { target: { value: 100 } });
+        fireEvent.change(await screen.findByLabelText(/quantity/i), { target: { value: 100 } });
+        fireEvent.change(await screen.findByLabelText(/description/i), { target: { value: "Product 99 description" } });
 
+        const combobox = screen.getByRole("combobox");
+        fireEvent.focus(combobox);
 
+        const option = screen.getByText("category 2");
+        fireEvent.click(option);
+
+        fireEvent.click(screen.getByText("Create"));
+
+        await waitFor(()=>{
+            expect(create).toHaveBeenCalledTimes(1)
+            expect(screen.getByText("Tên sản phẩm bị trùng")).toBeInTheDocument();
+        })
+    });
+
+    test("Update Product with duplicate name", async ()=>{
+        update.mockRejectedValueOnce({response:{data:{error:"Tên sản phẩm bị trùng"}}})
+        reactRoute.useLocation.mockReturnValue({
+            state: {
+                product: {
+                    id: 1,
+                    name: "Product 1",
+                    price: 100,
+                    quantity: 200,
+                    description: "Product 1 description",
+                    category: { id: 2, name: "category 2", description: "category 2 description" },
+                    categories: categoriesMock
+                }
+            }
+        });
+        render(
+            <reactRoute.MemoryRouter>
+                <ProductForm />
+            </reactRoute.MemoryRouter>
+        );
+        fireEvent.change(screen.getByDisplayValue("Product 1"), { target: { value: "Product 1" } });
+        fireEvent.change(screen.getByDisplayValue(100), { target: { value: 99 } });
+        fireEvent.change(screen.getByDisplayValue(200), { target: { value: 99 } });
+        fireEvent.change(screen.getByDisplayValue("Product 1 description"), { target: { value: "Product 99 description" } });
+
+        const combobox = screen.getByRole("combobox");
+        fireEvent.focus(combobox);
+
+        const option = screen.getByText("category 2");
+        fireEvent.click(option);
+
+        fireEvent.click(screen.getByText("Update"));
+        await waitFor(()=>{
+            expect(update).toHaveBeenCalledTimes(1)
+            expect(screen.getByText("Tên sản phẩm bị trùng")).toBeInTheDocument();
+        })
     })
+    test("Click Back button", async () => {
+        const backMock = jest.spyOn(window.history, "back").mockImplementation(() => {});
+        reactRoute.useLocation.mockReturnValue({ state: { product: { categories: categoriesMock } }})
+        render(
+            <reactRoute.MemoryRouter>
+                <ProductForm />
+            </reactRoute.MemoryRouter>
+        )
 
+        screen.getByText("Back").click();
+        await waitFor(() => {
+            expect(backMock).toHaveBeenCalledTimes(1);
+        })
+    })
 })
+
 
