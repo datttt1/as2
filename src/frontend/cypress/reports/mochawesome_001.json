@@ -1,0 +1,162 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-11-30T10:21:59.438Z",
+    "end": "2025-11-30T10:22:05.220Z",
+    "duration": 5782,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "099871b9-4f53-4158-8621-ef7445291956",
+      "title": "",
+      "fullFile": "cypress\\e2e\\product.cy.js",
+      "file": "cypress\\e2e\\product.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "2fc2304e-f86a-4ee0-acf3-2f35f861bffb",
+          "title": "Product E2E Tests",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Should create a new product successfully",
+              "fullTitle": "Product E2E Tests Should create a new product successfully",
+              "timedOut": null,
+              "duration": 2704,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "productPage.clickCreateBtn();\ncy.url().should(\"contain\", \"/products/form\");\nproductPage.fillProductForm({\n  name: \"Test Product\",\n  description: \"This is a test product\",\n  price: \"99\",\n  quantity: \"10\",\n  category: \"Điện thoại\"\n});\nproductPage.submitProductForm();\nproductPage.getProductInList(\"Test Product\").should(\"be.visible\");\nproductPage.getMessage().should(\"contain\", \"Created product successfully\");",
+              "err": {},
+              "uuid": "dc253760-c08c-4235-bced-040d50b6cf7e",
+              "parentUUID": "2fc2304e-f86a-4ee0-acf3-2f35f861bffb",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should update a product successfully",
+              "fullTitle": "Product E2E Tests Should update a product successfully",
+              "timedOut": null,
+              "duration": 1119,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "productPage.clickEditBtn(\"Test Product\");\ncy.url().should(\"contain\", \"/products/form\");\ncy.get('input[id=\"name\"]').should(\"have.value\", \"Test Product\");\ncy.get('input[id=\"price\"]').should(\"have.value\", \"99\");\ncy.get('input[id=\"quantity\"]').should(\"have.value\", \"10\");\ncy.get('textarea[id=\"description\"]').should(\"have.value\", \"This is a test product\");\ncy.get('[data-testid=\"category-input\"]').should(\"have.value\", \"Điện thoại\");\nproductPage.fillProductForm({\n  name: \"Updated Test Product\"\n});\nproductPage.submitProductForm();\ncy.wait(\"@updateProduct\");\ncy.url().should(\"contain\", \"/products\");\nproductPage.getProductInList(\"Updated Test Product\").should(\"be.visible\");\nproductPage.getMessage().should(\"contain\", \"Updated product successfully\");",
+              "err": {},
+              "uuid": "d886e3da-cf90-4380-8ba8-11fe5c4d3c48",
+              "parentUUID": "2fc2304e-f86a-4ee0-acf3-2f35f861bffb",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should show Product Detail",
+              "fullTitle": "Product E2E Tests Should show Product Detail",
+              "timedOut": null,
+              "duration": 324,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "productPage.getProductInList(\"Updated Test Product\").click();\ncy.url().should(\"contain\", \"/products/detail\");\ncy.get(\"p[data-testid='product-name']\").should(\"contain\", \"Updated Test Product\");\ncy.get(\"p[data-testid='product-description']\").should(\"contain\", \"This is a test product\");\ncy.get(\"p[data-testid='product-price']\").should(\"contain\", \"99\");\ncy.get(\"p[data-testid='product-quantity']\").should(\"contain\", \"10\");\ncy.get(\"p[data-testid='product-category']\").should(\"contain\", \"Điện thoại\");",
+              "err": {},
+              "uuid": "b81a2c31-b768-4eae-906f-572493f24d2d",
+              "parentUUID": "2fc2304e-f86a-4ee0-acf3-2f35f861bffb",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should delete a product successfully",
+              "fullTitle": "Product E2E Tests Should delete a product successfully",
+              "timedOut": null,
+              "duration": 314,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "productPage.clickDeleteBtn(\"Updated Test Product\");\ncy.wait(\"@deleteProduct\");\nproductPage.getProductInList(\"Updated Test Product\").should(\"not.exist\");\nproductPage.getMessage().should(\"contain\", \"Deleted product successfully\");",
+              "err": {},
+              "uuid": "b54137cf-3683-45db-96b2-cbe9dd02d969",
+              "parentUUID": "2fc2304e-f86a-4ee0-acf3-2f35f861bffb",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "dc253760-c08c-4235-bced-040d50b6cf7e",
+            "d886e3da-cf90-4380-8ba8-11fe5c4d3c48",
+            "b81a2c31-b768-4eae-906f-572493f24d2d",
+            "b54137cf-3683-45db-96b2-cbe9dd02d969"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 4461,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.3.2"
+    }
+  }
+}
