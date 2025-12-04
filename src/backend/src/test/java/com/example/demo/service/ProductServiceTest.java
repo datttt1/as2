@@ -107,12 +107,13 @@ import com.example.demo.repository.ProductRepository;
 
         when(productRepository.findAll()).thenReturn(list);
 
-        List<Product> result = productService.getAll();
+        List<Product> result = productService.getAll(); //chỉ có 1 product dc set trong init nên expect list size = 1
 
         assertEquals(1,result.size());
 
     }
 
+    // expect service throw exception
 @Test
 @DisplayName("Create product - name duplicate throws")
 void testCreateProductNameDuplicate() {
@@ -122,7 +123,7 @@ void testCreateProductNameDuplicate() {
     RuntimeException ex = assertThrows(RuntimeException.class, () ->
         productService.createProduct(product)
     );
-
+    // expect servive throw exception
     assertEquals("Tên sản phẩm bị trùng", ex.getMessage());
 }
 

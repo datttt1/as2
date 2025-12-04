@@ -31,18 +31,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  class ProductControllerIntegrationTest {
 
     @Autowired
-    private MockMvc mockMvc;
+    private MockMvc mockMvc; //cho phép gửi request giả đến controller giống như client thật.
 
     @MockBean
-    private ProductService productService;
+    private ProductService productService; //giả lập kết quả trả về khi controller gọi service.
 
     @Autowired
-    private ObjectMapper objectMapper;
+    private ObjectMapper objectMapper; //JSON khi gửi request.
     private Product product;
     private Category category;
 
     @BeforeEach
     void setUp() {
+        // tạo product để check
         product = new Product();
         category = new Category();
 
@@ -62,20 +63,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
     @DisplayName("GET /api/product/get/{id} - Get one product")
     void testGetProductById() throws Exception {
         when(productService.getProduct(1)).thenReturn(product);
-
+        // giả lập gọi api
         mockMvc.perform(get("/api/product/get/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.name").value("Laptop"));
+                .andExpect(jsonPath("$.name").value("Laptop")); //expect response json trả về 
     }
 
     @Test
     @DisplayName("GET /api/product - Get all products")
     void testGetAllProducts() throws Exception {
-        List<Product> list = Arrays.asList(product);
+        List<Product> list = Arrays.asList(product); // giả lập list product
         when(productService.getAll()).thenReturn(list);
 
-        mockMvc.perform(get("/api/product")) // Cần sửa route controller nếu getAllProducts
+        mockMvc.perform(get("/api/product")) // chỉ có 1 product nên expext list size = 1
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", org.hamcrest.Matchers.hasSize(1)))
                 .andExpect(jsonPath("$[0].name").value("Laptop"));
@@ -84,7 +85,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
     @Test
     @DisplayName("POST /api/product/create - Create product")
     void testCreateProduct() throws Exception {
-        ProductRequest request = new ProductRequest();
+        ProductRequest request = new ProductRequest();  //giả lập request
         request.setName("Keyboard");
         request.setPrice(new BigDecimal(500000));
         request.setQuantity(20);
@@ -100,18 +101,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
         product.setCategory(request.getCategory());
 
         when(productService.createProduct(any(Product.class))).thenReturn(product);
-
+        
+        //giả lập gọi api
         mockMvc.perform(post("/api/product/create")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value("Keyboard"))
+                .andExpect(jsonPath("$.name").value("Keyboard"))        //expect json trả về 
                 .andExpect(jsonPath("$.quantity").value(20));
     }
 
     @Test
     @DisplayName("PUT /api/product/update - Update product")
     void testUpdateProduct() throws Exception {
+        // giả lập request
         ProductRequest request = new ProductRequest();
         request.setId(1);
         request.setName("Keyboard Pro");
@@ -130,32 +133,32 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
         when(productService.updateProduct(any(Integer.class), any(Product.class)))
                 .thenReturn(updatedProduct);
-
+        // giả lập gọi api
         mockMvc.perform(put("/api/product/update")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value("Keyboard Pro"))
+                .andExpect(jsonPath("$.name").value("Keyboard Pro"))            // expect json trả về
                 .andExpect(jsonPath("$.price").value(600000));
     }
 
     @Test
     @DisplayName("DELETE /api/product/delete/{id} - Delete product")
     void testDeleteProduct() throws Exception {
-        doNothing().when(productService).deleteProduct(1);
+        doNothing().when(productService).deleteProduct(1);      //service ko throw lỗi
 
         mockMvc.perform(delete("/api/product/delete/1"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk());            //expect trả về status200
     }
 
 @Test
 @DisplayName("GET /api/product/get/{id} - Not Found")
 void testGetProductByIdNotFound() throws Exception {
     when(productService.getProduct(1)).thenThrow(new RuntimeException("Khong tim thay san pham"));
-
+        //giả lập service throw lỗi
     mockMvc.perform(get("/api/product/get/1"))
             .andExpect(status().isNotFound())
-            .andExpect(jsonPath("$.error").value("Khong tim thay san pham"));
+            .andExpect(jsonPath("$.error").value("Khong tim thay san pham"));   // expect json trả về
 }
 
 @Test
@@ -165,22 +168,23 @@ void testGetProductByName() throws Exception {
 
     mockMvc.perform(get("/api/product/getbyname/Laptop"))
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.name").value("Laptop"));
+            .andExpect(jsonPath("$.name").value("Laptop"));     //expect JSON trả về
 }
 
 @Test
 @DisplayName("GET /api/product/getbyname/{name} - Not Found")
 void testGetProductByNameNotFound() throws Exception {
     when(productService.getProductByName("Mouse")).thenThrow(new RuntimeException("Khong tim thay san pham"));
-
+        //giả lập service throw lỗi
     mockMvc.perform(get("/api/product/getbyname/Mouse"))
             .andExpect(status().isNotFound())
-            .andExpect(jsonPath("$.error").value("Khong tim thay san pham"));
+            .andExpect(jsonPath("$.error").value("Khong tim thay san pham"));   // controller trả về lỗi
 }
 
 @Test
 @DisplayName("POST /api/product/create - Fail due to exception")
 void testCreateProductFail() throws Exception {
+        //giả lập request
     ProductRequest request = new ProductRequest();
     request.setName("Laptop");
     request.setPrice(new BigDecimal("15000000"));
@@ -189,18 +193,20 @@ void testCreateProductFail() throws Exception {
     request.setCategory(category);
 
     when(productService.createProduct(any(Product.class)))
-            .thenThrow(new RuntimeException("Tên sản phẩm bị trùng"));
+            .thenThrow(new RuntimeException("Tên sản phẩm bị trùng"));  //expect service throw lỗi
 
+            //gọi api
     mockMvc.perform(post("/api/product/create")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(objectMapper.writeValueAsString(request)))
             .andExpect(status().isBadRequest())
-            .andExpect(jsonPath("$.error").value("Tên sản phẩm bị trùng"));
+            .andExpect(jsonPath("$.error").value("Tên sản phẩm bị trùng"));     //expect status , JSON
 }
 
 @Test
 @DisplayName("PUT /api/product/update - Fail due to exception")
 void testUpdateProductFail() throws Exception {
+        //giả lập request
     ProductRequest request = new ProductRequest();
     request.setId(1);
     request.setName("Laptop");
@@ -211,12 +217,12 @@ void testUpdateProductFail() throws Exception {
 
     when(productService.updateProduct(any(Integer.class), any(Product.class)))
             .thenThrow(new RuntimeException("Tên sản phẩm bị trùng"));
-
+        
     mockMvc.perform(put("/api/product/update")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(objectMapper.writeValueAsString(request)))
             .andExpect(status().isBadRequest())
-            .andExpect(jsonPath("$.error").value("Tên sản phẩm bị trùng"));
+            .andExpect(jsonPath("$.error").value("Tên sản phẩm bị trùng"));     //expect status , JSON
 }
 
 @Test
@@ -228,7 +234,7 @@ void testDeleteProductFail() throws Exception {
 
     mockMvc.perform(delete("/api/product/delete/999"))
             .andExpect(status().isNotFound())
-            .andExpect(jsonPath("$.error").value("San pham ko ton tai"));
+            .andExpect(jsonPath("$.error").value("San pham ko ton tai"));       //expect status, JSON
 }
 
 

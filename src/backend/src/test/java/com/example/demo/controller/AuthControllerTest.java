@@ -37,6 +37,7 @@ import com.example.demo.service.AuthService;
     @DisplayName("Mock: Controller với mocked service - success")
     void testLoginWithMockedService() throws Exception {
 
+        // giả lập request
         UserLoginRequest req = new UserLoginRequest();
         req.setUsername("testuser123");
         req.setPassword("user123456");
@@ -69,6 +70,7 @@ import com.example.demo.service.AuthService;
 @DisplayName("CORS: Cho phép cross-origin headers")
 void testCorsHeaders() throws Exception {
 
+        // giả lập response
     LoginResponse mockResponse = new LoginResponse(
             true,
             "Login Success",
@@ -78,6 +80,7 @@ void testCorsHeaders() throws Exception {
 
     when(authService.authenticate(any())).thenReturn(mockResponse);
 
+    // giả lập gọi api
     mockMvc.perform(
             post("/api/auth/login")
                     .contentType(MediaType.APPLICATION_JSON)
@@ -86,15 +89,16 @@ void testCorsHeaders() throws Exception {
     )
     .andExpect(status().isOk())
     .andExpect(header().exists("Access-Control-Allow-Origin"))
-    .andExpect(header().string("Access-Control-Allow-Origin", "*"))
+    .andExpect(header().string("Access-Control-Allow-Origin", "*")) //kiểm tra server có trả header CORS ko
     .andExpect(header().string("Content-Type", "application/json"));
 }
 
 
 @Test
 @DisplayName("POST /api/auth/login - Kiểm tra response structure")
-void testLoginResponseStructure() throws Exception {
+void testLoginResponseStructure() throws Exception { // kiểm tra cấu trúc JSON
 
+        // giả lập response
     LoginResponse mockResponse = new LoginResponse(
             true,
             "Login Success",
@@ -103,7 +107,7 @@ void testLoginResponseStructure() throws Exception {
     );
 
     when(authService.authenticate(any())).thenReturn(mockResponse);
-
+    // giả lập gọi api
     mockMvc.perform(
             post("/api/auth/login")
                     .contentType(MediaType.APPLICATION_JSON)
@@ -112,7 +116,7 @@ void testLoginResponseStructure() throws Exception {
     .andExpect(status().isOk())
     .andExpect(jsonPath("$.success").value(true))
     .andExpect(jsonPath("$.message").value("Login Success"))
-    .andExpect(jsonPath("$.token").value("token123"))
+    .andExpect(jsonPath("$.token").value("token123"))                   // check JSON
     .andExpect(jsonPath("$.user.username").value("testuser"))
     .andExpect(jsonPath("$.user.email").value("test@gmail.com"));
 }

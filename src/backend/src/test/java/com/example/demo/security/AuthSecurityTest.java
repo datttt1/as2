@@ -38,7 +38,7 @@ public class AuthSecurityTest {
     }
 
     @Test
-    @DisplayName("❌ Test SQL Injection vào username")
+    @DisplayName(" Test SQL Injection vào username")
     void sqlInjectionUsernameTest() {
         UserLoginRequest req = new UserLoginRequest();
         req.setUsername("' OR '1'='1");
@@ -51,7 +51,7 @@ public class AuthSecurityTest {
     }
 
     @Test
-    @DisplayName("❌ Test XSS Injection trong username")
+    @DisplayName(" Test XSS Injection trong username")
     void xssInjectionTest() {
         UserLoginRequest req = new UserLoginRequest();
         req.setUsername("<script>alert(1)</script>");

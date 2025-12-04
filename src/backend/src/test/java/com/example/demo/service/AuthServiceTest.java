@@ -49,6 +49,7 @@ import com.example.demo.repository.UserRepository;
         assertTrue(res.isSuccess());
         assertEquals("Login Success", res.getMessage());
         assertNotNull(res.getToken());
+
         
 }
 
@@ -63,6 +64,7 @@ import com.example.demo.repository.UserRepository;
 
         assertFalse(res.isSuccess());
         assertEquals("Username not found", res.getMessage());
+
     }
 
 @Test
@@ -76,6 +78,7 @@ import com.example.demo.repository.UserRepository;
 
         assertFalse(res.isSuccess());
         assertEquals("Wrong Password", res.getMessage());
+
     }
 
 @Test
@@ -88,6 +91,7 @@ import com.example.demo.repository.UserRepository;
         LoginResponse res = authService.authenticate(req);
         assertFalse(res.isSuccess());
         assertEquals("Validation failed", res.getMessage());
+
     }
 
 @Test
@@ -98,6 +102,7 @@ import com.example.demo.repository.UserRepository;
         req.setPassword("testuser12323");
 
         assertTrue(authService.isValidRequest(req));
+
     }
 
 @Test
@@ -108,5 +113,7 @@ import com.example.demo.repository.UserRepository;
         req.setUsername("123");
 
         assertFalse(authService.isValidRequest(req));
+
+
     }
 }
